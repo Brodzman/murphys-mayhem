@@ -529,17 +529,17 @@ points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f5tp3"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
+[sub_resource type="PlaneMesh" id="PlaneMesh_ugjjv"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ptp0j"]
+albedo_texture = ExtResource("94_ofioq")
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6eyqw"]
 bg_color = Color(0.952154, 0.416432, 3.85046e-07, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ugjjv"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ptp0j"]
-albedo_texture = ExtResource("94_ofioq")
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_wxdcx")
@@ -1804,9 +1804,113 @@ material_override = ExtResource("55_cux80")
 transform = Transform3D(26.2514, 0, 0, 0, 1, 0, 0, 0, 0.290416, 0.429694, 0.325215, -11.6168)
 material_override = ExtResource("55_cux80")
 
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Greybox"]
+transform = Transform3D(-9.48974e-08, 1, 0, 9.48974e-08, 1.91069e-15, -1.167, -2.171, -4.37114e-08, -5.10112e-08, -9.28111, 10.0668, -0.0596788)
+mesh = SubResource("PlaneMesh_ugjjv")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_ptp0j")
+
+[node name="Table_w_tablecloth" parent="Greybox" instance=ExtResource("86_aya0j")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 11.4456, -0.0831519, -4.2379)
+
+[node name="Node3D" parent="Greybox" instance=ExtResource("87_h2ujb")]
+transform = Transform3D(0.1, 0, 0, 0, 0.0999891, -0.00147649, 0, 0.00147649, 0.0999891, 11.2639, 2.0587, -4.41492)
+
+[node name="Node3D2" parent="Greybox" instance=ExtResource("95_bicef")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.97237, 0.409882, -7.08756)
+
+[node name="TimeManager" type="Node" parent="."]
+script = ExtResource("8_8gqm4")
+
+[node name="Timer" type="Timer" parent="TimeManager"]
+
+[node name="TaskManager" type="Node" parent="."]
+script = ExtResource("15_b8hnn")
+
+[node name="TaskDelayTimer" type="Timer" parent="TaskManager"]
+
+[node name="Tutorial" type="Node" parent="."]
+script = ExtResource("100_nb1ia")
+
+[node name="Lighting" type="Node" parent="."]
+
+[node name="MAIN LIGHT" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.49673, 8.01218, -0.187403)
+light_color = Color(0.990807, 0.724033, 0.473901, 1)
+light_energy = 14.874
+omni_range = 80.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.359178, 11.2122, -1.49705)
+light_energy = 25.0
+spot_range = 11.7625
+spot_angle = 43.2237
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 8.15442, 11.2303, -1.49445)
+light_energy = 25.0
+spot_range = 11.7625
+spot_angle = 43.2237
+
+[node name="window01" parent="Lighting" instance=ExtResource("78_bxkhy")]
+transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 12.7098, 3.55748, -0.209672)
+
+[node name="window02" parent="Lighting/window01" instance=ExtResource("79_mwrrr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0349854)
+
+[node name="window03" parent="Lighting" instance=ExtResource("80_o6nhu")]
+transform = Transform3D(-2.62268e-06, 0, -69.5936, 0, 60, 0, 60, 0, -3.04203e-06, -5.48369, 9.85258, 7.65949)
+
+[node name="walloutlet" parent="Lighting" instance=ExtResource("81_pmpbf")]
+transform = Transform3D(-2.62268e-06, 0, -60, 0, 60, 0, 60, 0, -2.62268e-06, -9.85665, 8.14135, -2.72861)
+
+[node name="walloutlet2" parent="Lighting" instance=ExtResource("81_pmpbf")]
+transform = Transform3D(-2.62268e-06, 0, -60, 0, 60, 0, 60, 0, -2.62268e-06, 12.7747, 1.32935, 5.24601)
+
+[node name="hanginglight05" parent="Lighting" instance=ExtResource("82_bs674")]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -4.68231, 5.47114, -6.6388)
+
+[node name="hanginglight07" parent="Lighting" instance=ExtResource("82_bs674")]
+transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -6.13017, 11.6478, -0.0574532)
+
+[node name="hanginglight02" parent="Lighting" instance=ExtResource("83_mdxj1")]
+transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 9.42209, 10.3284, 0.851421)
+
+[node name="hanginglight03" parent="Lighting" instance=ExtResource("83_mdxj1")]
+transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 7.05916, 10.3284, 0.851421)
+
+[node name="hanginglight04" parent="Lighting" instance=ExtResource("83_mdxj1")]
+transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 4.86654, 10.3284, 0.851421)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.82768, 8.44191, 0.879443)
+light_energy = 50.0
+omni_range = 0.9
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.05687, 8.44191, 0.879443)
+light_energy = 50.0
+omni_range = 0.9
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.17077, 10.2704, -0.048559)
+light_energy = 16.81
+omni_range = 0.9
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.94207, 4.31474, -6.77072)
+light_energy = 16.81
+omni_range = 0.9
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lighting"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.42322, 8.44191, 0.879443)
+light_energy = 50.0
+omni_range = 0.9
+
 [node name="PlaceholderHUD" type="Node" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="PlaceholderHUD"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -1979,119 +2083,12 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_6eyqw")
 value = 1.67
 rounded = true
 
-[node name="TimeManager" type="Node" parent="."]
-script = ExtResource("8_8gqm4")
-
-[node name="Timer" type="Timer" parent="TimeManager"]
-
 [node name="DialogueManager" parent="." instance=ExtResource("13_ywthu")]
-
-[node name="TaskManager" type="Node" parent="."]
-script = ExtResource("15_b8hnn")
-
-[node name="TaskDelayTimer" type="Timer" parent="TaskManager"]
-
-[node name="IMPORTING" type="Node" parent="."]
-
-[node name="LIGHTING" type="Node" parent="."]
-
-[node name="MAIN LIGHT" type="OmniLight3D" parent="LIGHTING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.49673, 8.01218, -0.187403)
-light_color = Color(0.990807, 0.724033, 0.473901, 1)
-light_energy = 14.874
-omni_range = 80.0
-
-[node name="SpotLight3D" type="SpotLight3D" parent="LIGHTING"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0.359178, 11.2122, -1.49705)
-light_energy = 25.0
-spot_range = 11.7625
-spot_angle = 43.2237
-
-[node name="SpotLight3D2" type="SpotLight3D" parent="LIGHTING"]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 8.15442, 11.2303, -1.49445)
-light_energy = 25.0
-spot_range = 11.7625
-spot_angle = 43.2237
-
-[node name="window01" parent="LIGHTING" instance=ExtResource("78_bxkhy")]
-transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 12.7098, 3.55748, -0.209672)
-
-[node name="window02" parent="LIGHTING/window01" instance=ExtResource("79_mwrrr")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0349854)
-
-[node name="window03" parent="LIGHTING" instance=ExtResource("80_o6nhu")]
-transform = Transform3D(-2.62268e-06, 0, -69.5936, 0, 60, 0, 60, 0, -3.04203e-06, -5.48369, 9.85258, 7.65949)
-
-[node name="walloutlet" parent="LIGHTING" instance=ExtResource("81_pmpbf")]
-transform = Transform3D(-2.62268e-06, 0, -60, 0, 60, 0, 60, 0, -2.62268e-06, -9.85665, 8.14135, -2.72861)
-
-[node name="walloutlet2" parent="LIGHTING" instance=ExtResource("81_pmpbf")]
-transform = Transform3D(-2.62268e-06, 0, -60, 0, 60, 0, 60, 0, -2.62268e-06, 12.7747, 1.32935, 5.24601)
-
-[node name="hanginglight05" parent="LIGHTING" instance=ExtResource("82_bs674")]
-transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -4.68231, 5.47114, -6.6388)
-
-[node name="hanginglight07" parent="LIGHTING" instance=ExtResource("82_bs674")]
-transform = Transform3D(50, 0, 0, 0, 50, 0, 0, 0, 50, -6.13017, 11.6478, -0.0574532)
-
-[node name="hanginglight02" parent="LIGHTING" instance=ExtResource("83_mdxj1")]
-transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 9.42209, 10.3284, 0.851421)
-
-[node name="hanginglight03" parent="LIGHTING" instance=ExtResource("83_mdxj1")]
-transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 7.05916, 10.3284, 0.851421)
-
-[node name="hanginglight04" parent="LIGHTING" instance=ExtResource("83_mdxj1")]
-transform = Transform3D(80, 0, 0, 0, 80, 0, 0, 0, 80, 4.86654, 10.3284, 0.851421)
-
-[node name="OmniLight3D" type="OmniLight3D" parent="LIGHTING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.82768, 8.44191, 0.879443)
-light_energy = 50.0
-omni_range = 0.9
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="LIGHTING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.05687, 8.44191, 0.879443)
-light_energy = 50.0
-omni_range = 0.9
-
-[node name="OmniLight3D4" type="OmniLight3D" parent="LIGHTING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.17077, 10.2704, -0.048559)
-light_energy = 16.81
-omni_range = 0.9
-
-[node name="OmniLight3D5" type="OmniLight3D" parent="LIGHTING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.94207, 4.31474, -6.77072)
-light_energy = 16.81
-omni_range = 0.9
-
-[node name="OmniLight3D3" type="OmniLight3D" parent="LIGHTING"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.42322, 8.44191, 0.879443)
-light_energy = 50.0
-omni_range = 0.9
-
-[node name="Node3D" parent="." instance=ExtResource("87_h2ujb")]
-transform = Transform3D(0.1, 0, 0, 0, 0.0999891, -0.00147649, 0, 0.00147649, 0.0999891, 11.2639, 2.0587, -4.41492)
-
-[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("89_4fljq")
-volume_db = -4.0
-autoplay = true
-bus = &"Music"
-
-[node name="Table_w_tablecloth" parent="." instance=ExtResource("86_aya0j")]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 11.4456, -0.0831519, -4.2379)
 
 [node name="pausemenu" parent="." instance=ExtResource("55_6t3w8")]
 visible = false
 offset_left = 14.0
 offset_right = 14.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-9.48974e-08, 1, 0, 9.48974e-08, 1.91069e-15, -1.167, -2.171, -4.37114e-08, -5.10112e-08, -9.28111, 10.0668, -0.0596788)
-mesh = SubResource("PlaneMesh_ugjjv")
-surface_material_override/0 = SubResource("StandardMaterial3D_ptp0j")
-
-[node name="Node3D2" parent="." instance=ExtResource("95_bicef")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.97237, 0.409882, -7.08756)
 
 [node name="restartmenu" parent="." instance=ExtResource("99_4lfo1")]
 visible = false
@@ -2100,8 +2097,11 @@ offset_top = 2.0
 offset_right = -3.0
 offset_bottom = 2.0
 
-[node name="Tutorial" type="Node" parent="."]
-script = ExtResource("100_nb1ia")
+[node name="BackgroundMusic" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("89_4fljq")
+volume_db = -4.0
+autoplay = true
+bus = &"Music"
 
 [connection signal="interacted" from="Greybox/NavigationRegion3D/Fish" to="Greybox/NavigationRegion3D/Fish" method="_on_interacted"]
 [connection signal="screen_entered" from="Greybox/NavigationRegion3D/Fish/VisibleOnScreenNotifier3D" to="Greybox/NavigationRegion3D/Fish" method="_on_visible_on_screen_notifier_3d_screen_entered"]
