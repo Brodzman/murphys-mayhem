@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Murphy's Mayem"
+config/name="Murphy's Mayhem"
 run/main_scene="res://Scenes/menu.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://Images/Character Icons/Murphy_Icon.PNG"

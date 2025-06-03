@@ -1,0 +1,219 @@
+[gd_scene load_steps=7 format=3 uid="uid://c6lr3s6tch3yb"]
+
+[ext_resource type="Script" uid="uid://byip8yuj7pnty" path="res://Scripts/UI/color_rect.gd" id="1_385d5"]
+[ext_resource type="FontFile" uid="uid://b2nrwwb8gsbqu" path="res://Fonts/Banana Stick.otf" id="2_u8x54"]
+[ext_resource type="Texture2D" uid="uid://3cy0844nedtc" path="res://Images/UI Art/clock_bg.png" id="2_vmxvs"]
+[ext_resource type="FontFile" uid="uid://bx8x3erx4wwy6" path="res://Fonts/Technology-Bold.ttf" id="4_vmxvs"]
+[ext_resource type="FontFile" uid="uid://dan6olgi41scp" path="res://Fonts/Technology.ttf" id="5_vpo0l"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6eyqw"]
+bg_color = Color(0.952154, 0.416432, 3.85046e-07, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="PlaceholderHUD" type="Node"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -579.0
+offset_top = -326.0
+offset_right = 578.0
+offset_bottom = 328.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 11.9
+mouse_filter = 1
+color = Color(1, 1, 1, 0)
+script = ExtResource("1_385d5")
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect"]
+layout_mode = 0
+offset_left = -657.0
+offset_top = -363.0
+offset_right = 831.0
+offset_bottom = 378.0
+scale = Vector2(0.205, 0.205)
+texture = ExtResource("2_vmxvs")
+
+[node name="Hunger" type="Label" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 8.5
+offset_top = 226.0
+offset_right = 214.5
+offset_bottom = 301.0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_u8x54")
+theme_override_font_sizes/font_size = 17
+text = "Murphy's Hunger"
+
+[node name="Time" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1782.0
+offset_top = -971.0
+offset_right = -1520.0
+offset_bottom = -875.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(0.984314, 0.941176, 0.658824, 1)
+theme_override_fonts/font = ExtResource("4_vmxvs")
+theme_override_font_sizes/font_size = 88
+text = "5:30"
+
+[node name="Suffix" type="Label" parent="ColorRect"]
+layout_mode = 0
+offset_left = -472.0
+offset_top = -316.0
+offset_right = -179.0
+offset_bottom = -139.0
+theme_override_colors/font_color = Color(0.984314, 0.941176, 0.658824, 1)
+theme_override_fonts/font = ExtResource("5_vpo0l")
+theme_override_font_sizes/font_size = 88
+text = "PM"
+
+[node name="Task" type="Label" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -451.0
+offset_top = 12.0
+offset_right = -16.0
+offset_bottom = 243.0
+grow_horizontal = 0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_u8x54")
+theme_override_font_sizes/font_size = 30
+text = "TEXT"
+autowrap_mode = 3
+
+[node name="ProgressBar" type="ProgressBar" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 1064.0
+offset_top = -406.0
+offset_right = 1137.0
+offset_bottom = -222.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_u8x54")
+max_value = 5.0
+fill_mode = 3
+
+[node name="GameOver" type="Label" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -403.5
+offset_top = -180.5
+offset_right = 403.5
+offset_bottom = 180.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_fonts/font = ExtResource("2_u8x54")
+theme_override_font_sizes/font_size = 100
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PlantsToWater" type="Label" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -394.0
+offset_top = -324.0
+offset_right = -114.0
+offset_bottom = -222.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("2_u8x54")
+theme_override_font_sizes/font_size = 25
+
+[node name="CallerID" type="Label" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -190.0
+offset_top = -85.5
+offset_right = 190.0
+offset_bottom = 85.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/font = ExtResource("2_u8x54")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="ColorRect"]
+visible = false
+layout_mode = 0
+offset_top = 9.0
+offset_right = 254.0
+offset_bottom = 48.0
+theme_override_fonts/font = ExtResource("2_u8x54")
+text = "   Hold shift/right bumper to sprint
+	   Press O/Left bumper to restart"
+
+[node name="Drop" type="Label" parent="ColorRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 554.5
+offset_top = -6.0
+offset_right = 741.5
+offset_bottom = 101.0
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("2_u8x54")
+theme_override_font_sizes/font_size = 20
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HungerBar" type="ProgressBar" parent="ColorRect"]
+visible = false
+layout_mode = 0
+offset_left = 13.0
+offset_top = 577.0
+offset_right = 148.0
+offset_bottom = 639.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_6eyqw")
+value = 1.67
+rounded = true

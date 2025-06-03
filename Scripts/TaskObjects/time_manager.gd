@@ -9,6 +9,7 @@ var minutes = 0
 signal hunger_down
 
 @onready var time: Label = $"../PlaceholderHUD/ColorRect/Time"
+@onready var suffix: Label = $"../PlaceholderHUD/ColorRect/Suffix"
 @onready var timer: Timer = $Timer
 @onready var game_over_label: Label = $"../PlaceholderHUD/ColorRect/GameOver"
 
@@ -19,6 +20,7 @@ func _ready():
 	
 func _on_timer_timeout() -> void:
 	var print_time
+	var print_suffix
 	if minutes < 10:
 		minutes = "0" + str(minutes)
 	else:
@@ -26,10 +28,14 @@ func _on_timer_timeout() -> void:
 	
 	# Converts 24hr time to 12hr time
 	if current_hour > 12:
-		print_time = str(current_hour - 12) + ":" + str(minutes) + "pm"
+		print_time = str(current_hour - 12) + ":" + str(minutes) 
+		print_suffix = "pm"
 	else:
-		print_time = str(current_hour) + ":" + str(minutes) + "am"
-	time.text = "Time is: " + print_time
+		print_time = str(current_hour) + ":" + str(minutes)
+		print_suffix = "am"
+	time.text = print_time
+	suffix.text = print_suffix
+	
 	
 	minutes = int(minutes)
 	
