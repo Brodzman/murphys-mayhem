@@ -3,6 +3,8 @@ extends Control
 @onready var resume_button = $VBoxContainer/resume
 @onready var main: Node3D = $".."
 
+var save_path = "user://savegame.save"
+
 func _ready():
 	visible = false
 
@@ -44,3 +46,7 @@ func _on_restart_pressed() -> void:
 func _on_resume_pressed() -> void:
 	$button.play()
 	main.toggle_pause()
+	
+func save():
+	var file = FileAccess.open(save_path, FileAccess.WRITE)
+	#file.store_var(variable)
