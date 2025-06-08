@@ -21,8 +21,6 @@ buses/default_bus_layout="res://Audio/default_bus_layout.tres"
 
 [display]
 
-window/size/viewport_width=2560
-window/size/viewport_height=1440
 window/stretch/mode="canvas_items"
 window/stretch/aspect="expand"
 
