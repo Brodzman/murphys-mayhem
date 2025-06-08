@@ -614,7 +614,6 @@ bus = &"Sound"
 [node name="Greybox" type="Node" parent="."]
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="Greybox"]
-visible = false
 navigation_mesh = SubResource("NavigationMesh_2v22i")
 
 [node name="Fish" type="CharacterBody3D" parent="Greybox/NavigationRegion3D" groups=["murphy"]]
@@ -676,6 +675,7 @@ size = Vector3(4.61377, 21.6777, 4.83889)
 
 [node name="Stairs" type="CSGMesh3D" parent="Greybox/NavigationRegion3D"]
 transform = Transform3D(-0.725374, 0.688355, 7.48341e-08, 0.688355, 0.725374, 0, -6.34142e-08, 6.01779e-08, -0.856003, 2.44289, 2.78569, -10.3704)
+visible = false
 use_collision = true
 mesh = SubResource("BoxMesh_nb1ia")
 
