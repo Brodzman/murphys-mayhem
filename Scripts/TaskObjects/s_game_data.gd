@@ -15,4 +15,18 @@ func update_hour(value):
 func update_minute(value):
 	current_minute = value
 	
+func update_tasks(value):
+	current_tasks = value
+
+func update_tasks_time_left(value):
+	current_tasks_time_left = value
+	
+func update_muffins_eaten(value):
+	muffins_eaten = value
+	
+func update_tutorial_complete(value):
+	tutorial_complete = value
+	
+func update_levels_complete(value):
+	levels_complete = value
 	

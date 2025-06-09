@@ -61,6 +61,7 @@ func _ready() -> void:
 	verify_save_directory(save_file_path)
 	if ResourceLoader.exists(save_file_path + save_file_name) == true:
 		load_data()
+	print(active_tasks)
 	
 	task_label.text = "Tasks"
 	text_track = task_label.text
@@ -197,6 +198,7 @@ func task_roll(task):
 		task_get_rng()
 		task_delay_timer.wait_time = 0.1
 		task_delay_timer.start()
+	print(active_tasks)
 
 func _on_spam_call_done(new_text):
 	text_track = new_text
@@ -247,11 +249,17 @@ func load_data():
 	print("loaded")
 
 func load_on_start():
-	pass
+	active_tasks = game_data.current_tasks
+	time_of_day.current_hour = game_data.current_hour
+	time_of_day.minutes = game_data.current_minute
 
 func save_data():
 	game_data.update_hour(time_of_day.current_hour)
 	game_data.update_minute(time_of_day.minutes)
+	game_data.update_tasks(active_tasks)
+	# TODO Add in muffins complete
+	# TODO Add in tutorial complete
+	# TODO Add in levels complete
 	ResourceSaver.save(game_data, save_file_path + save_file_name)
 	print("saved")
 
