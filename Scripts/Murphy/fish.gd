@@ -242,10 +242,12 @@ func load_on_start():
 	self.position = fish_data.fish_location
 
 func save_data():
+	fish_data.update_health(current_hp)
+	fish_data.update_hunger(hunger)
+	fish_data.update_in_bowl(in_bowl)
+	fish_data.update_is_held(is_held)
 	ResourceSaver.save(fish_data, save_file_path + save_file_name)
 	print("saved")
 
 func _on_save_all_data():
 	save_data()
-	
-	

@@ -12,3 +12,12 @@ func update_position(value):
 	
 func update_health(value):
 	fish_health = value
+	
+func update_hunger(value):
+	pass
+
+func update_is_held(value):
+	pass
+	
+func update_in_bowl(value):
+	pass

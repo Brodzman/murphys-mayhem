@@ -59,6 +59,7 @@ func load_on_start():
 	self.position = player_data.player_location
 
 func save_data():
+	player_data.update_position(self.position)
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
 	print("saved")
 
@@ -83,9 +84,6 @@ func _process(delta): # CAM MOVEMENT BASED ON JOYSTICK
 		save_data()
 	if Input.is_action_just_pressed("load"):
 		load_data()
-	
-	# TEMP Currently saves every frame, will change to an autosave and save + exit
-	player_data.update_position(self.position)
 		
 	var right_x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	var right_y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
