@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+# Save file variables
 var save_file_path = "user://save/"
 var save_file_name = "PlayerSave.tres"
 var player_data = PlayerData.new()
@@ -38,12 +39,13 @@ var is_moving
 
 
 func _ready():
-	pause_menu.connect("save_player", Callable(self, "_on_save_player"))
+	pause_menu.connect("save_all_data", Callable(self, "_on_save_all_data"))
 	verify_save_directory(save_file_path)
 	joy_input = Vector2.ZERO
 	t_bob = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-	load_data()
+	if ResourceLoader.exists(save_file_path + save_file_name) == true:
+		load_data()
 
 func verify_save_directory(path : String):
 	DirAccess.make_dir_absolute(path)
@@ -60,7 +62,7 @@ func save_data():
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
 	print("saved")
 
-func _on_save_player():
+func _on_save_all_data():
 	save_data()
 
 func _unhandled_input(event): #CAM MOVEMENT BASED ON MOUSE
