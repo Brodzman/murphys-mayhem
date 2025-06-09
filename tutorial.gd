@@ -18,44 +18,44 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	match current_step: 
 		TutorialStep.INTRO_CUTSCENE:
-			print("Step Intro")
+			#print("Step Intro")
 			intro_cutscene()
 			await intro_done
 			current_step = TutorialStep.FEED_MURPHY
 			
 			
 		TutorialStep.FEED_MURPHY:
-			print("Step Feed")
+			#print("Step Feed")
 			await fish.tut_murphy_fed
 			current_step = TutorialStep.ANSWER_PHONE
 			
 		TutorialStep.ANSWER_PHONE:
-			print("Step Answer Phone")
+			#print("Step Answer Phone")
 			await taskmanager.tut_friend_called
 			current_step = TutorialStep.FIND_MURPHY
 			
 		TutorialStep.FIND_MURPHY:
-			print("Step Find")
+			#print("Step Find")
 			await fish.tut_murphy_found
 			current_step = TutorialStep.WATCH_TV
 			
 		TutorialStep.WATCH_TV:
-			print("Step TV")
+			#print("Step TV")
 			await taskmanager.tut_watched
 			current_step = TutorialStep.CHASE_MURPHY
 			
 		TutorialStep.CHASE_MURPHY:
-			print("Step Chase")
+			#print("Step Chase")
 			await fish.tut_murphy_found
 			current_step = TutorialStep.MOP
 			
 		TutorialStep.MOP:
-			print("Step Mop")
+			#print("Step Mop")
 			await taskmanager.tut_mopped
 			current_step = TutorialStep.GOODLUCK_CUTSCENE
 			
 		TutorialStep.GOODLUCK_CUTSCENE:
-			print("Step Goodluck")
+			#print("Step Goodluck")
 			await InputEvent
 			tutorial_enabled = false
 			
@@ -63,11 +63,11 @@ func _process(delta: float) -> void:
 
 func start_tutorial():
 	tutorial_enabled = true
-	print("tutorial started")
+	#print("tutorial started")
 
 func end_tutorial():
 	tutorial_enabled = false
-	print("tutorial ended")
+	#print("tutorial ended")
 
 func intro_cutscene():
 	emit_signal("intro_done")

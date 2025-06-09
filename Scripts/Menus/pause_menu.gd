@@ -44,3 +44,4 @@ func _on_restart_pressed() -> void:
 func _on_resume_pressed() -> void:
 	$button.play()
 	main.toggle_pause()
+	

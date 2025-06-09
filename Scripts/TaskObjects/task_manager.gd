@@ -22,6 +22,14 @@ var text_track
 var task_number
 var can_eat_muffin = true
 var can_call = true
+var active_tasks = {
+	"friend_call": false,
+	"spam_call": false,
+	"water_plant": false,
+	"mop_floor": false,
+	"watch_tv": false,
+	"muffin_eat": false,
+}
 
 signal task_call(task, description)
 signal task_plant(task, description)
@@ -72,6 +80,7 @@ func task_roll(task):
 				description = " | Friend is calling"
 				task_label.text = text_track + " | Answer the phone"
 				text_track = task_label.text
+				active_tasks["friend_call"] = true
 				emit_signal("task_call", task, description)
 			else:
 				task_get_rng()
@@ -92,6 +101,7 @@ func task_roll(task):
 				description = " | Spam call"
 				task_label.text = text_track + " | Answer the phone"
 				text_track = task_label.text
+				active_tasks["spam_call"] = true
 				emit_signal("task_call", task, description)
 			else:
 				task_get_rng()
@@ -109,6 +119,7 @@ func task_roll(task):
 			description = " | You need to water your plants"
 			task_label.text = text_track + description
 			text_track = task_label.text
+			active_tasks["water_plant"] = true
 			emit_signal("task_plant", task, description)
 		else:
 			task_get_rng()
@@ -128,6 +139,7 @@ func task_roll(task):
 			description = " | Clean up Murphy's mess"
 			task_label.text = text_track + description
 			text_track = task_label.text
+			active_tasks["mop_floor"] = true
 			emit_signal("task_mop", task, description)
 		else:
 			task_get_rng()
@@ -145,6 +157,7 @@ func task_roll(task):
 			description = " | Your favorite show is on"
 			task_label.text = text_track + description
 			text_track = task_label.text
+			active_tasks["watch_tv"] = true
 			emit_signal("task_tv", task, description)
 		else:
 			task_get_rng()
@@ -163,6 +176,7 @@ func task_roll(task):
 				description = " | Find a muffin to eat"
 				task_label.text = text_track + description
 				text_track = task_label.text
+				active_tasks["muffin_eat"] = true
 				emit_signal("task_muffin", task, description)
 			else:
 				task_get_rng()
@@ -176,30 +190,37 @@ func task_roll(task):
 func _on_spam_call_done(new_text):
 	text_track = new_text
 	can_call = true
+	active_tasks["spam_call"] = false
 	
 func _on_friend_call_done(new_text):
 	text_track = new_text
 	can_call = true
+	active_tasks["friend_call"] = false
 	emit_signal("tut_friend_called")
 	
 func _on_watch_done(new_text):
 	text_track = new_text
+	active_tasks["watch_tv"] = false
 	emit_signal("tut_watched")
 
 func _on_water_done(new_text):
 	text_track = new_text
+	active_tasks["water_plant"] = false
 	
 func _on_mop_done(new_text):
 	puddle.visible = false
 	puddle_collision.disabled = true
 	text_track = new_text
+	active_tasks["mop_floor"] = false
 	emit_signal("tut_mopped")
 	
 func _on_muffin_done(new_text):
 	text_track = new_text
 	can_eat_muffin = true
+	active_tasks["muffin_eat"] = false
 
 func _all_muffins_done(new_text):
 	text_track = new_text
 	can_eat_muffin = false
+	active_tasks["muffin_eat"] = false
 	

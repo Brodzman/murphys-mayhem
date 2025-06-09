@@ -145,8 +145,8 @@ agent_max_climb = 3.0
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_677al"]
 points = PackedVector3Array(-0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_87u11"]
-size = Vector2(11, 4)
+[sub_resource type="BoxMesh" id="BoxMesh_nb1ia"]
+size = Vector3(11.125, 0.055, 4.79)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5nt03"]
 size = Vector3(0.0339336, 0.0258789, 0.0605431)
@@ -478,10 +478,10 @@ size = Vector3(8.92474, 1, 0.206055)
 size = Vector3(1, 2.06946, 8.23279)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_x5hla"]
-size = Vector3(1, 1.20032, 0.133301)
+size = Vector3(1, 1.82477, 0.174194)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_24e46"]
-size = Vector3(0.819824, 1, 3.1665)
+size = Vector3(0.389648, 0.345001, 3.10657)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_bcrpx"]
 
@@ -676,8 +676,9 @@ size = Vector3(4.61377, 21.6777, 4.83889)
 
 [node name="Stairs" type="CSGMesh3D" parent="Greybox/NavigationRegion3D"]
 transform = Transform3D(-0.725374, 0.688355, 7.48341e-08, 0.688355, 0.725374, 0, -6.34142e-08, 6.01779e-08, -0.856003, 2.44289, 2.78569, -10.3704)
+visible = false
 use_collision = true
-mesh = SubResource("PlaneMesh_87u11")
+mesh = SubResource("BoxMesh_nb1ia")
 
 [node name="FINAL 3D ASSETS" type="Node" parent="Greybox/NavigationRegion3D"]
 
@@ -1567,11 +1568,11 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 13.628
 shape = SubResource("BoxShape3D_tukhf")
 
 [node name="CollisionShape3D12" type="CollisionShape3D" parent="Greybox/NavigationRegion3D/HOUSE ARCHITECTURE/WALLCOLL"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5541, -6.06713, -7.29881)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.5541, -5.75491, -7.25065)
 shape = SubResource("BoxShape3D_x5hla")
 
-[node name="CollisionShape3D13" type="CollisionShape3D" parent="Greybox/NavigationRegion3D/HOUSE ARCHITECTURE/WALLCOLL"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.74574, -2.89816, -8.86576)
+[node name="StairBlocker" type="CollisionShape3D" parent="Greybox/NavigationRegion3D/HOUSE ARCHITECTURE/WALLCOLL"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.53065, -3.57325, -8.83579)
 shape = SubResource("BoxShape3D_24e46")
 
 [node name="Front_Door" parent="Greybox/NavigationRegion3D/HOUSE ARCHITECTURE" instance=ExtResource("58_mqr1b")]

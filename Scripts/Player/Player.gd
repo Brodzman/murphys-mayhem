@@ -1,5 +1,9 @@
 extends CharacterBody3D
 
+var save_file_path = "user://save/"
+var save_file_name = "PlayerSave.tres"
+var player_data = PlayerData.new()
+
 var speed 
 const WALK_SPEED = 5.0
 const SPRINT_SPEED = 8.0
@@ -31,9 +35,25 @@ var is_moving
 @onready var interact_ray: RayCast3D = $Head/Camera3D/InteractRay
 
 func _ready():
+	verify_save_directory(save_file_path)
 	joy_input = Vector2.ZERO
 	t_bob = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+
+func verify_save_directory(path : String):
+	DirAccess.make_dir_absolute(path)
+	
+func load_data():
+	player_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
+	load_on_start()
+	print("loaded")
+
+func load_on_start():
+	self.position = player_data.player_location
+
+func save_data():
+	ResourceSaver.save(player_data, save_file_path + save_file_name)
+	print("saved")
 
 
 func _unhandled_input(event): #CAM MOVEMENT BASED ON MOUSE
@@ -47,6 +67,16 @@ func _unhandled_input(event): #CAM MOVEMENT BASED ON MOUSE
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
 func _process(delta): # CAM MOVEMENT BASED ON JOYSTICK
 	# CAM MOVEMENT BASED ON JOYSTICK
+	
+	# TEMP Keybind setup to test save system
+	if Input.is_action_just_pressed("save"):
+		save_data()
+	if Input.is_action_just_pressed("load"):
+		load_data()
+	
+	# TEMP Currently saves every frame, will change to an autosave and save + exit
+	player_data.update_position(self.position)
+		
 	var right_x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	var right_y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 	
