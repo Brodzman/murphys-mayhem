@@ -240,6 +240,10 @@ func load_data():
 
 func load_on_start():
 	self.position = fish_data.fish_location
+	current_hp = fish_data.fish_health
+	hunger = fish_data.fish_hunger
+	is_held = fish_data.fish_is_held
+	in_bowl = fish_data.fish_in_bowl
 
 func save_data():
 	fish_data.update_health(current_hp)

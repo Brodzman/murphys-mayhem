@@ -47,6 +47,9 @@ func _ready():
 	if ResourceLoader.exists(save_file_path + save_file_name) == true:
 		load_data()
 
+#######################
+# Functions for saving
+#######################
 func verify_save_directory(path : String):
 	DirAccess.make_dir_absolute(path)
 	
