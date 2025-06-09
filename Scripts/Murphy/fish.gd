@@ -1,5 +1,10 @@
 extends CharacterBody3D
 
+# Save file variables
+var save_file_path = "user://save/"
+var save_file_name = "FishSave.tres"
+var fish_data = FishData.new()
+
 const MAX_HP = 100
 const SPEED = 8.0
 const HP_LOST_PER_SECOND = 1
@@ -37,6 +42,7 @@ signal tut_murphy_found
 @onready var fish_bowl: StaticBody3D = $"../../FishBowl"
 
 func _ready() -> void:
+	verify_save_directory(save_file_path)
 	current_hp = MAX_HP
 	hunger = 25
 	is_held = false
@@ -48,6 +54,8 @@ func _ready() -> void:
 	$"../../Food".connect("food_in_hand", Callable(self, "_on_food_in_hand"))
 	$"../../Food2".connect("food_in_hand", Callable(self, "_on_food_in_hand"))
 	hunger_bar.value = hunger
+	if ResourceLoader.exists(save_file_path + save_file_name) == true:
+		load_data()
 
 func interact(body):
 	interacted.emit(body)
@@ -87,9 +95,6 @@ func _on_bowl_place():
 	$Murphy_Fish_JUMP.visible = false
 	emit_signal("tut_murphy_found")
 	
-
-	
-
 func _on_visible_on_screen_notifier_3d_screen_entered() -> void:
 	on_screen = true
 
@@ -214,5 +219,39 @@ func _on_hunger_down():
 func _on_food_in_hand():
 	has_food = true
 	
+func _process(delta: float) -> void:
+	fish_data.update_position(self.position)
 	
+	if Input.is_action_just_pressed("save"):
+		save_data()
+	if Input.is_action_just_pressed("load"):
+		load_data()
 	
+#######################
+# Functions for saving
+#######################
+func verify_save_directory(path : String):
+	DirAccess.make_dir_absolute(path)
+	
+func load_data():
+	fish_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
+	load_on_start()
+	print("loaded")
+
+func load_on_start():
+	self.position = fish_data.fish_location
+	current_hp = fish_data.fish_health
+	hunger = fish_data.fish_hunger
+	is_held = fish_data.fish_is_held
+	in_bowl = fish_data.fish_in_bowl
+
+func save_data():
+	fish_data.update_health(current_hp)
+	fish_data.update_hunger(hunger)
+	fish_data.update_in_bowl(in_bowl)
+	fish_data.update_is_held(is_held)
+	ResourceSaver.save(fish_data, save_file_path + save_file_name)
+	print("saved")
+
+func _on_save_all_data():
+	save_data()

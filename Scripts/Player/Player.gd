@@ -1,5 +1,6 @@
 extends CharacterBody3D
 
+# Save file variables
 var save_file_path = "user://save/"
 var save_file_name = "PlayerSave.tres"
 var player_data = PlayerData.new()
@@ -33,13 +34,22 @@ var is_moving
 @onready var player_steps: AudioStreamPlayer3D = $PlayerSteps
 @onready var fish: CharacterBody3D = $"../Greybox/NavigationRegion3D/Fish"
 @onready var interact_ray: RayCast3D = $Head/Camera3D/InteractRay
+@onready var pause_menu = $"../pausemenu"
+
+
 
 func _ready():
+	pause_menu.connect("save_all_data", Callable(self, "_on_save_all_data"))
 	verify_save_directory(save_file_path)
 	joy_input = Vector2.ZERO
 	t_bob = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if ResourceLoader.exists(save_file_path + save_file_name) == true:
+		load_data()
 
+#######################
+# Functions for saving
+#######################
 func verify_save_directory(path : String):
 	DirAccess.make_dir_absolute(path)
 	
@@ -52,9 +62,12 @@ func load_on_start():
 	self.position = player_data.player_location
 
 func save_data():
+	player_data.update_position(self.position)
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
 	print("saved")
 
+func _on_save_all_data():
+	save_data()
 
 func _unhandled_input(event): #CAM MOVEMENT BASED ON MOUSE
 	#CAM MOVEMENT BASED ON MOUSE 
@@ -65,6 +78,7 @@ func _unhandled_input(event): #CAM MOVEMENT BASED ON MOUSE
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
+		
 func _process(delta): # CAM MOVEMENT BASED ON JOYSTICK
 	# CAM MOVEMENT BASED ON JOYSTICK
 	
@@ -73,9 +87,6 @@ func _process(delta): # CAM MOVEMENT BASED ON JOYSTICK
 		save_data()
 	if Input.is_action_just_pressed("load"):
 		load_data()
-	
-	# TEMP Currently saves every frame, will change to an autosave and save + exit
-	player_data.update_position(self.position)
 		
 	var right_x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	var right_y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)

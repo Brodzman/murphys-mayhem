@@ -2,6 +2,9 @@ extends Control
 
 @onready var resume_button = $VBoxContainer/resume
 @onready var main: Node3D = $".."
+@onready var player: CharacterBody3D = $"../Player"
+
+signal save_all_data()
 
 func _ready():
 	visible = false
@@ -28,6 +31,7 @@ func _ready():
 
 func _on_menu_pressed() -> void:
 	$button.play()
+	emit_signal("save_all_data")
 	main.toggle_pause()
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE) 
 	get_tree().change_scene_to_file("res://Scenes/menu.tscn")
@@ -44,4 +48,3 @@ func _on_restart_pressed() -> void:
 func _on_resume_pressed() -> void:
 	$button.play()
 	main.toggle_pause()
-	

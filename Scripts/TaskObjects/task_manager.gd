@@ -5,10 +5,16 @@ extends Node
 
 # Currently coded so that you only need to interact with object to complete task
 
+# Save file variables
+var save_file_path = "user://save/"
+var save_file_name = "GameSave.tres"
+var game_data = GameData.new()
+
 # Normal node variables
 @onready var task_label: Label = $"../PlaceholderHUD/ColorRect/Task"
 @onready var time_of_day: Node = $"../TimeManager"
 @onready var puddle_collision: CollisionShape3D = $"../Greybox/Puddle/CollisionShape3D"
+@onready var pause_menu: Control = $"../pausemenu"
 
 # Task node variables
 @onready var phone: StaticBody3D = $"../Greybox/Phone"
@@ -43,6 +49,7 @@ signal tut_mopped
 func _ready() -> void:
 	can_eat_muffin = true
 	can_call = true
+	pause_menu.connect("save_all_data", Callable(self, "_on_save_all_data"))
 	phone.connect("spam_call_done", Callable(self, "_on_spam_call_done"))
 	phone.connect("friend_call_done", Callable(self, "_on_friend_call_done"))
 	tv.connect("tv_done", Callable(self, "_on_watch_done"))
@@ -50,6 +57,10 @@ func _ready() -> void:
 	puddle.connect("mop_done", Callable(self, "_on_mop_done"))
 	muffin.connect("muffin_done", Callable(self, "_on_muffin_done"))
 	muffin.connect("all_muffins_done", Callable(self, "_all_muffins_done"))
+	
+	verify_save_directory(save_file_path)
+	if ResourceLoader.exists(save_file_path + save_file_name) == true:
+		load_data()
 	
 	task_label.text = "Tasks"
 	text_track = task_label.text
@@ -224,3 +235,31 @@ func _all_muffins_done(new_text):
 	can_eat_muffin = false
 	active_tasks["muffin_eat"] = false
 	
+#######################
+# Functions for saving
+#######################
+func verify_save_directory(path : String):
+	DirAccess.make_dir_absolute(path)
+	
+func load_data():
+	game_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
+	load_on_start()
+	print("loaded")
+
+func load_on_start():
+	pass
+
+func save_data():
+	game_data.update_hour(time_of_day.current_hour)
+	game_data.update_minute(time_of_day.minutes)
+	ResourceSaver.save(game_data, save_file_path + save_file_name)
+	print("saved")
+
+func _on_save_all_data():
+	save_data()
+	
+func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("save"):
+		save_data()
+	if Input.is_action_just_pressed("load"):
+		load_data()

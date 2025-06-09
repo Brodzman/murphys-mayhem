@@ -1,0 +1,18 @@
+extends Resource
+class_name GameData
+
+@export var current_hour : int
+@export var current_minute : int
+@export var current_tasks : Dictionary
+@export var current_tasks_time_left : Dictionary
+@export var muffins_eaten : int
+@export var tutorial_complete : bool
+@export var levels_complete : Dictionary
+
+func update_hour(value):
+	current_hour = value
+	
+func update_minute(value):
+	current_minute = value
+	
+	

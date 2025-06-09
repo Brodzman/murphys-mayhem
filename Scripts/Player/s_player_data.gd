@@ -5,3 +5,5 @@ class_name PlayerData
 
 func update_position(value):
 	player_location = value
+	
+	
