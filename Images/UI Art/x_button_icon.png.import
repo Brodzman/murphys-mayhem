@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3cy0844nedtc"
-path="res://.godot/imported/clock_bg.png-dbdfb44c3c9e0b87fdaef41c1a5979d1.ctex"
+uid="uid://ddae66rsdwxaa"
+path="res://.godot/imported/x_button_icon.png-bd2d15e2507d9eef675685aa091b498b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/UI Art/clock_bg.png"
-dest_files=["res://.godot/imported/clock_bg.png-dbdfb44c3c9e0b87fdaef41c1a5979d1.ctex"]
+source_file="res://Images/UI Art/x_button_icon.png"
+dest_files=["res://.godot/imported/x_button_icon.png-bd2d15e2507d9eef675685aa091b498b.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

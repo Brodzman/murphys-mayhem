@@ -1,17 +1,20 @@
-[gd_scene load_steps=7 format=3 uid="uid://c6lr3s6tch3yb"]
+[gd_scene load_steps=13 format=3 uid="uid://c6lr3s6tch3yb"]
 
 [ext_resource type="Script" uid="uid://byip8yuj7pnty" path="res://Scripts/UI/color_rect.gd" id="1_385d5"]
 [ext_resource type="FontFile" uid="uid://b2nrwwb8gsbqu" path="res://Fonts/Banana Stick.otf" id="2_u8x54"]
 [ext_resource type="Texture2D" uid="uid://3cy0844nedtc" path="res://Images/UI Art/clock_bg.png" id="2_vmxvs"]
+[ext_resource type="FontFile" uid="uid://dh32vslbjc75e" path="res://Fonts/Simply Rounded.ttf" id="4_12ea7"]
 [ext_resource type="FontFile" uid="uid://bx8x3erx4wwy6" path="res://Fonts/Technology-Bold.ttf" id="4_vmxvs"]
 [ext_resource type="FontFile" uid="uid://dan6olgi41scp" path="res://Fonts/Technology.ttf" id="5_vpo0l"]
+[ext_resource type="Texture2D" uid="uid://dp1218xm08tcd" path="res://Images/UI Art/hunger_border.png" id="6_58g8i"]
+[ext_resource type="Texture2D" uid="uid://b5vuj76y5bydw" path="res://Images/UI Art/hunger_mask.png" id="7_xbrwk"]
+[ext_resource type="Texture2D" uid="uid://bqqurm1p78iwt" path="res://Images/UI Art/hunger_gradient2.png" id="8_58g8i"]
+[ext_resource type="Texture2D" uid="uid://clg56qr8aqpv5" path="res://Images/UI Art/tasks_bg.png" id="9_xbrwk"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6eyqw"]
-bg_color = Color(0.952154, 0.416432, 3.85046e-07, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vpo0l"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_58g8i"]
+texture = ExtResource("8_58g8i")
 
 [node name="PlaceholderHUD" type="Node"]
 
@@ -34,6 +37,51 @@ color = Color(1, 1, 1, 0)
 script = ExtResource("1_385d5")
 metadata/_edit_use_anchors_ = true
 
+[node name="TextureRect2" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 343.0
+offset_top = -360.0
+offset_right = 1795.0
+offset_bottom = 1494.0
+grow_horizontal = 0
+scale = Vector2(0.22, 0.22)
+texture = ExtResource("9_xbrwk")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="ColorRect/TextureRect2"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 0
+offset_left = 518.454
+offset_top = 86.6364
+offset_right = 1025.45
+offset_bottom = 311.636
+theme_override_fonts/font = ExtResource("2_u8x54")
+theme_override_font_sizes/font_size = 180
+text = "TASKS"
+
+[node name="Task" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = 437.0
+offset_top = -281.0
+offset_right = 872.0
+offset_bottom = -213.0
+grow_horizontal = 0
+scale = Vector2(1.04, 1.04)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = 20
+theme_override_fonts/font = ExtResource("4_12ea7")
+theme_override_font_sizes/font_size = 22
+text = "Answer the phone
+"
+autowrap_mode = 3
+
 [node name="TextureRect" type="TextureRect" parent="ColorRect"]
 layout_mode = 0
 offset_left = -657.0
@@ -44,6 +92,7 @@ scale = Vector2(0.205, 0.205)
 texture = ExtResource("2_vmxvs")
 
 [node name="Hunger" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = 4
@@ -59,6 +108,7 @@ theme_override_font_sizes/font_size = 17
 text = "Murphy's Hunger"
 
 [node name="Time" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 3
 anchor_left = 1.0
@@ -77,6 +127,7 @@ theme_override_font_sizes/font_size = 88
 text = "5:30"
 
 [node name="Suffix" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
 layout_mode = 0
 offset_left = -472.0
 offset_top = -316.0
@@ -87,25 +138,8 @@ theme_override_fonts/font = ExtResource("5_vpo0l")
 theme_override_font_sizes/font_size = 88
 text = "PM"
 
-[node name="Task" type="Label" parent="ColorRect"]
-visible = false
-layout_mode = 1
-anchors_preset = 1
-anchor_left = 1.0
-anchor_right = 1.0
-offset_left = -451.0
-offset_top = 12.0
-offset_right = -16.0
-offset_bottom = 243.0
-grow_horizontal = 0
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_fonts/font = ExtResource("2_u8x54")
-theme_override_font_sizes/font_size = 30
-text = "TEXT"
-autowrap_mode = 3
-
 [node name="ProgressBar" type="ProgressBar" parent="ColorRect"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = 2
@@ -121,6 +155,7 @@ max_value = 5.0
 fill_mode = 3
 
 [node name="GameOver" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -142,6 +177,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="PlantsToWater" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = 3
@@ -159,6 +195,7 @@ theme_override_fonts/font = ExtResource("2_u8x54")
 theme_override_font_sizes/font_size = 25
 
 [node name="CallerID" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 1
 anchors_preset = 8
@@ -180,6 +217,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label" type="Label" parent="ColorRect"]
+unique_name_in_owner = true
 visible = false
 layout_mode = 0
 offset_top = 9.0
@@ -190,7 +228,7 @@ text = "   Hold shift/right bumper to sprint
 	   Press O/Left bumper to restart"
 
 [node name="Drop" type="Label" parent="ColorRect"]
-visible = false
+unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -207,13 +245,41 @@ theme_override_font_sizes/font_size = 20
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HungerBar" type="ProgressBar" parent="ColorRect"]
-visible = false
+[node name="HungerBorder" type="TextureRect" parent="ColorRect"]
+unique_name_in_owner = true
 layout_mode = 0
-offset_left = 13.0
-offset_top = 577.0
-offset_right = 148.0
-offset_bottom = 639.0
-theme_override_styles/fill = SubResource("StyleBoxFlat_6eyqw")
-value = 1.67
+offset_left = -677.0
+offset_top = 877.0
+offset_right = 151.0
+offset_bottom = 1531.0
+scale = Vector2(0.225, 0.225)
+texture = ExtResource("6_58g8i")
+
+[node name="HungerMask" type="TextureRect" parent="ColorRect/HungerBorder"]
+unique_name_in_owner = true
+clip_children = 2
+clip_contents = true
+layout_mode = 0
+offset_left = 17.2414
+offset_top = 17.2417
+offset_right = 811.241
+offset_bottom = 636.242
+texture = ExtResource("7_xbrwk")
+
+[node name="HungerBar" type="ProgressBar" parent="ColorRect/HungerBorder/HungerMask"]
+unique_name_in_owner = true
+clip_children = 1
+layout_mode = 0
+offset_left = -75.0
+offset_top = -79.0
+offset_right = 723.0
+offset_bottom = 492.0
+scale = Vector2(1.27, 1.27)
+theme_override_styles/background = SubResource("StyleBoxEmpty_vpo0l")
+theme_override_styles/fill = SubResource("StyleBoxTexture_58g8i")
+value = 60.0
 rounded = true
+fill_mode = 3
+show_percentage = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]

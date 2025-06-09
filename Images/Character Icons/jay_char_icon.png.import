@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3cy0844nedtc"
-path="res://.godot/imported/clock_bg.png-dbdfb44c3c9e0b87fdaef41c1a5979d1.ctex"
+uid="uid://c7jjqeyx8brnm"
+path="res://.godot/imported/jay_char_icon.png-651e1d92c689bd68f65abac54d3225ec.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/UI Art/clock_bg.png"
-dest_files=["res://.godot/imported/clock_bg.png-dbdfb44c3c9e0b87fdaef41c1a5979d1.ctex"]
+source_file="res://Images/Character Icons/jay_char_icon.png"
+dest_files=["res://.godot/imported/jay_char_icon.png-651e1d92c689bd68f65abac54d3225ec.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1

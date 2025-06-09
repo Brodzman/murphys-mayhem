@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://3cy0844nedtc"
-path="res://.godot/imported/clock_bg.png-dbdfb44c3c9e0b87fdaef41c1a5979d1.ctex"
+uid="uid://srpmgggtx1ee"
+path="res://.godot/imported/hunger_gradient.png-c8e6c52f1faf4c8d6f5551c85421208d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Images/UI Art/clock_bg.png"
-dest_files=["res://.godot/imported/clock_bg.png-dbdfb44c3c9e0b87fdaef41c1a5979d1.ctex"]
+source_file="res://Images/UI Art/hunger_gradient.png"
+dest_files=["res://.godot/imported/hunger_gradient.png-c8e6c52f1faf4c8d6f5551c85421208d.ctex"]
 
 [params]
 
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=0
+detect_3d/compress_to=1
