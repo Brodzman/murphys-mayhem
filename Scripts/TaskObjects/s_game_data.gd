@@ -15,4 +15,6 @@ func update_hour(value):
 func update_minute(value):
 	current_minute = value
 	
-	
+func update_tasks(value):
+	current_tasks = value
+	print(current_tasks)
