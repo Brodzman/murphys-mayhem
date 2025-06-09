@@ -250,11 +250,16 @@ func load_data():
 
 func load_on_start():
 	active_tasks = game_data.current_tasks
+	time_of_day.current_hour = game_data.current_hour
+	time_of_day.minutes = game_data.current_minute
 
 func save_data():
 	game_data.update_hour(time_of_day.current_hour)
 	game_data.update_minute(time_of_day.minutes)
 	game_data.update_tasks(active_tasks)
+	# TODO Add in muffins complete
+	# TODO Add in tutorial complete
+	# TODO Add in levels complete
 	ResourceSaver.save(game_data, save_file_path + save_file_name)
 	print("saved")
 
