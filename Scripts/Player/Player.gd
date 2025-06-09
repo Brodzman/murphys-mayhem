@@ -33,12 +33,17 @@ var is_moving
 @onready var player_steps: AudioStreamPlayer3D = $PlayerSteps
 @onready var fish: CharacterBody3D = $"../Greybox/NavigationRegion3D/Fish"
 @onready var interact_ray: RayCast3D = $Head/Camera3D/InteractRay
+@onready var pause_menu = $"../pausemenu"
+
+
 
 func _ready():
+	pause_menu.connect("save_player", Callable(self, "_on_save_player"))
 	verify_save_directory(save_file_path)
 	joy_input = Vector2.ZERO
 	t_bob = 0.0
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	load_data()
 
 func verify_save_directory(path : String):
 	DirAccess.make_dir_absolute(path)
@@ -55,6 +60,8 @@ func save_data():
 	ResourceSaver.save(player_data, save_file_path + save_file_name)
 	print("saved")
 
+func _on_save_player():
+	save_data()
 
 func _unhandled_input(event): #CAM MOVEMENT BASED ON MOUSE
 	#CAM MOVEMENT BASED ON MOUSE 
@@ -65,6 +72,7 @@ func _unhandled_input(event): #CAM MOVEMENT BASED ON MOUSE
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
 		
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
+		
 func _process(delta): # CAM MOVEMENT BASED ON JOYSTICK
 	# CAM MOVEMENT BASED ON JOYSTICK
 	

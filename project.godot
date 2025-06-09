@@ -19,11 +19,6 @@ config/icon="res://Images/Character Icons/Murphy_Icon.PNG"
 
 buses/default_bus_layout="res://Audio/default_bus_layout.tres"
 
-[display]
-
-window/size/viewport_width=2560
-window/size/viewport_height=1440
-
 [editor_plugins]
 
 enabled=PackedStringArray()
