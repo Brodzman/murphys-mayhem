@@ -1,5 +1,6 @@
 extends Node
 
+var task_time = 30
 var description_text
 var muffin_complete = true
 var muffin_eat
@@ -15,6 +16,7 @@ signal all_muffins_done
 @onready var node_3d: Node3D = $"../../../.."
 
 func _ready() -> void:
+	muffin_timer.wait_time = task_time
 	muffin_complete = true
 	muffin_arr = []
 	can_eat = false

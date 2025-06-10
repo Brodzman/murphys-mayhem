@@ -1,5 +1,6 @@
 extends Interactable
 
+var task_time = 40
 var description_text
 var watch_tv
 var watch_tv_done = true
@@ -15,6 +16,7 @@ signal tv_done
 @onready var node_3d: Node3D = $"../.."
 
 func _ready() -> void:
+	tv_timer.wait_time = task_time
 	watch_tv_done = true
 	watch_time = 0
 	$"../../TaskManager".connect("task_tv", Callable(self, "_on_task"))

@@ -1,5 +1,6 @@
 extends Interactable
 
+var task_time = 20
 var mop_floor
 var description_text
 var mop_progress = 0
@@ -13,6 +14,7 @@ signal mop_done
 @onready var node_3d: Node3D = $"../.."
 
 func _ready() -> void:
+	puddle_timer.wait_time = task_time
 	mop_progress = 0
 	mop_complete = true
 	$"../../TaskManager".connect("task_mop", Callable(self, "_on_task"))
