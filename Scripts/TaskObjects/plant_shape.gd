@@ -1,6 +1,5 @@
 extends Interactable
 
-var task_time = 40
 var description_text
 var watered_progress = 0
 var water_complete = true
@@ -21,7 +20,6 @@ signal water_done
 @onready var node_3d: Node3D = $"../.."
 
 func _ready() -> void:
-	plant_timer.wait_time = task_time
 	watered_progress = 0
 	water_complete = true
 	plants_arr = []

@@ -1,6 +1,5 @@
 extends Interactable
 
-var task_time = 20
 var friend_call_complete = true
 var spam_call_complete = true
 var phone_call
@@ -18,7 +17,6 @@ signal spam_call_done
 
 
 func _ready() -> void:
-	phone_timer.wait_time = task_time
 	friend_call_complete = true
 	spam_call_complete = true
 	$"../../TaskManager".connect("task_call", Callable(self, "_on_task"))
