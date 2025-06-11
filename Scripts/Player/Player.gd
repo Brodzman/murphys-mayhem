@@ -5,27 +5,27 @@ var save_file_path = "user://save/"
 var save_file_name = "PlayerSave.tres"
 var player_data = PlayerData.new()
 
+# Player movement variables
 var speed 
 const WALK_SPEED = 5.0
 const SPRINT_SPEED = 8.0
 const JUMP_VELOCITY = 10
 const FALL_SPEED = 30
-
-const SENSITIVITY = 0.003
-const DEADZONE = 0.2
-const MAX_UP_ANGLE = 50
-const MAX_DOWN_ANGLE = -50
-
 const BOB_FREQ = 2.0
 const BOB_AMP = 0.09
 var t_bob = 0.0
 
-#fov variables
+# Control variables
+const SENSITIVITY = 0.003
+const DEADZONE = 0.2
+const MAX_UP_ANGLE = 50
+const MAX_DOWN_ANGLE = -50
+var joy_input = Vector2.ZERO
+
+#FOV variables
 const BASE_FOV = 75.0
 const SPRINT_FOV = 90.0
 const FOV_CHANGE_SPEED = 5.0
-
-var joy_input = Vector2.ZERO
 
 var is_moving
 
@@ -36,8 +36,6 @@ var is_moving
 @onready var interact_ray: RayCast3D = $Head/Camera3D/InteractRay
 @onready var pause_menu = $"../pausemenu"
 
-
-
 func _ready():
 	pause_menu.connect("save_all_data", Callable(self, "_on_save_all_data"))
 	verify_save_directory(save_file_path)
@@ -47,47 +45,15 @@ func _ready():
 	if ResourceLoader.exists(save_file_path + save_file_name) == true:
 		load_data()
 
-#######################
-# Functions for saving
-#######################
-func verify_save_directory(path : String):
-	DirAccess.make_dir_absolute(path)
-	
-func load_data():
-	player_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
-	load_on_start()
-	print("loaded")
-
-func load_on_start():
-	self.position = player_data.player_location
-
-func save_data():
-	player_data.update_position(self.position)
-	ResourceSaver.save(player_data, save_file_path + save_file_name)
-	print("saved")
-
-func _on_save_all_data():
-	save_data()
-
 func _unhandled_input(event): #CAM MOVEMENT BASED ON MOUSE
 	#CAM MOVEMENT BASED ON MOUSE 
 	if event is InputEventMouseMotion:
-		
 		head.rotate_y(-event.relative.x * SENSITIVITY)
-		
 		camera.rotate_x(-event.relative.y * SENSITIVITY)
-		
 		camera.rotation.x = clamp(camera.rotation.x, deg_to_rad(-60), deg_to_rad(60))
 		
-func _process(delta): # CAM MOVEMENT BASED ON JOYSTICK
+func _process(delta):
 	# CAM MOVEMENT BASED ON JOYSTICK
-	
-	# TEMP Keybind setup to test save system
-	if Input.is_action_just_pressed("save"):
-		save_data()
-	if Input.is_action_just_pressed("load"):
-		load_data()
-		
 	var right_x = Input.get_joy_axis(0, JOY_AXIS_RIGHT_X)
 	var right_y = Input.get_joy_axis(0, JOY_AXIS_RIGHT_Y)
 	
@@ -95,23 +61,22 @@ func _process(delta): # CAM MOVEMENT BASED ON JOYSTICK
 		right_x = 0
 	if abs(right_y) < DEADZONE:
 		right_y = 0
-	
 	if right_x != 0:
 		head.rotate_object_local(Vector3.UP, -right_x * SENSITIVITY * delta * 1500)
-	
 	if right_y != 0:
-		
 		var current_rotation = head.rotation_degrees.x
-		
 		var new_rotation = current_rotation - right_y * SENSITIVITY * delta * 60000
-		
 		new_rotation = clamp(new_rotation, MAX_DOWN_ANGLE, MAX_UP_ANGLE)
-		
 		head.rotation_degrees.x = new_rotation
 		head.rotation.z = 0
-		
 	if head:
 		head.rotation.z = 0
+		
+	# TEMP Keybind setup to test save system
+	if Input.is_action_just_pressed("save"):
+		save_data()
+	if Input.is_action_just_pressed("load"):
+		load_data()
 		
 func _physics_process(delta: float) -> void: #DEFAULT MOVEMENT
 	
@@ -159,7 +124,26 @@ func _headbob(time) -> Vector3: #HEADBOB
 	pos.y = sin(time * BOB_FREQ) * BOB_AMP
 	pos.x = cos(time * BOB_FREQ / 2) * BOB_AMP
 	return pos 
+	
 
+#######################
+# Functions for saving
+#######################
+func verify_save_directory(path : String):
+	DirAccess.make_dir_absolute(path)
+	
+func load_data():
+	player_data = ResourceLoader.load(save_file_path + save_file_name).duplicate(true)
+	load_on_start()
+	print("loaded")
 
-func _on_plant_2_interacted(body: Variant) -> void:
-	pass # Replace with function body.
+func load_on_start():
+	self.position = player_data.player_location
+
+func save_data():
+	player_data.update_position(self.position)
+	ResourceSaver.save(player_data, save_file_path + save_file_name)
+	print("saved")
+
+func _on_save_all_data():
+	save_data()

@@ -13,8 +13,11 @@ func _on_holding():
 		is_holding = true
 	
 func _on_interacted(body: Variant) -> void:
+	print(is_holding)
 	if is_holding == true and fish.in_bowl == false and fish.is_held == true:
 		emit_signal("bowl_place")
+		is_holding = false
+		return
 	if fish.has_food == true and fish.in_bowl == true:
 		fish.feed_fish()
 	elif is_holding == false and fish.in_bowl == true:
