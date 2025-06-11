@@ -89,8 +89,9 @@ func _on_bowl_place():
 	prompt_message = "·   E"
 	velocity = Vector3(0, 0, 0)
 	region.enabled = false
-	position = Vector3(11.189, 2.63, -4.352)
 	rotation = Vector3(0, 0, 0)
+	await get_tree().create_timer(0.1).timeout
+	position = Vector3(11.189, 2.63, -4.352)
 	$Murphy_Fish_IDLE.visible = true
 	$Murphy_Fish_JUMP.visible = false
 	emit_signal("tut_murphy_found")
