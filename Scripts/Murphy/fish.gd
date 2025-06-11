@@ -11,7 +11,7 @@ const HP_LOST_PER_SECOND = 1
 const TIME_TO_ESCAPE = 1
 const MAX_HUNGER = 100
 const HUNGER_LOST_PER_HOUR = 15
-const ESCAPE_CHANCE = 100
+
 var current_hp = MAX_HP
 var hunger = 25
 var is_held = false
@@ -56,6 +56,8 @@ func _ready() -> void:
 	hunger_bar.value = hunger
 	if ResourceLoader.exists(save_file_path + save_file_name) == true:
 		load_data()
+	if in_bowl == false:
+		fish_move()
 
 func interact(body):
 	interacted.emit(body)
@@ -107,12 +109,15 @@ func _on_visible_on_screen_notifier_3d_screen_exited() -> void:
 			timer.start(TIME_TO_ESCAPE)
 			
 # When the player looks away, the fish will attempt to escape
-# It has at 50/50 chance to escape
+# Change the value proceding escape roll < or > to determine escape chance
 # Each attempt delay is set by the TIME_TO_ESCAPE variable
+func _on_timer_timeout() -> void:
+	attempt_escape()
+	
 func attempt_escape():
 	if in_bowl == true:
 		if on_screen == false:
-			escape_roll = randi_range(1, ESCAPE_CHANCE)
+			escape_roll = randi_range(1, 100)
 			if escape_roll < 30:
 				in_bowl = false
 				region.enabled = true
@@ -152,10 +157,6 @@ func random_position():
 	if random == 3:
 		position = Vector3(-6.928, 7.85, 5.281)
 		rotation = Vector3(0, -90, -90)
-
-func _on_timer_timeout() -> void:
-	attempt_escape()
-	
 		
 func _physics_process(delta: float) -> void:
 	var current_location = global_transform.origin
@@ -193,8 +194,6 @@ func rotate_fish():
 	pass
 	#$Murphy_Fish_JUMP.rotation_degrees.z += 90
 
-
-
 func lose_hp():
 	if in_bowl == false:
 		if current_hp <= 0:
@@ -215,14 +214,10 @@ func _on_hunger_down():
 		await get_tree().create_timer(1).timeout
 		node_3d.toggle_restartmenu()
 		
-		
-		
 func _on_food_in_hand():
 	has_food = true
 	
-func _process(delta: float) -> void:
-	fish_data.update_position(self.position)
-	
+func _process(delta: float) -> void:	
 	if Input.is_action_just_pressed("save"):
 		save_data()
 	if Input.is_action_just_pressed("load"):
@@ -247,6 +242,7 @@ func load_on_start():
 	in_bowl = fish_data.fish_in_bowl
 
 func save_data():
+	fish_data.update_position(self.position)
 	fish_data.update_health(current_hp)
 	fish_data.update_hunger(hunger)
 	fish_data.update_in_bowl(in_bowl)
