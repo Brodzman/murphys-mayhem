@@ -110,7 +110,7 @@ func task_roll(task):
 					task_delay_timer.start()
 				task = "friend_call"
 				description = " | Friend is calling"
-				spawn_task_ui("Answer the phone")  # ← This adds it to the container
+				
 				active_tasks["friend_call"] = true
 				emit_signal("task_call", task, description)
 				
@@ -257,11 +257,7 @@ func _all_muffins_done(new_text):
 	can_eat_muffin = false
 	active_tasks["muffin_eat"] = false
 	
-func spawn_task_ui(description: String):
-		var task_item = task_item_scene.instantiate()
-		var label = task_item.get_node("TaskLabel")
-		label.text = description
-		task_list.add_child(task_item)
+
 		
 #######################
 # Functions for saving

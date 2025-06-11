@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://c6lr3s6tch3yb"]
+[gd_scene load_steps=14 format=3 uid="uid://c6lr3s6tch3yb"]
 
 [ext_resource type="Script" uid="uid://byip8yuj7pnty" path="res://Scripts/UI/color_rect.gd" id="1_385d5"]
+[ext_resource type="Script" uid="uid://dlc4c5g1ipp6g" path="res://Scripts/UI/placeholder_hud.gd" id="1_lwlpr"]
 [ext_resource type="FontFile" uid="uid://b2nrwwb8gsbqu" path="res://Fonts/Banana Stick.otf" id="2_u8x54"]
 [ext_resource type="Texture2D" uid="uid://3cy0844nedtc" path="res://Images/UI Art/clock_bg.png" id="2_vmxvs"]
 [ext_resource type="FontFile" uid="uid://dh32vslbjc75e" path="res://Fonts/Simply Rounded.ttf" id="4_12ea7"]
@@ -17,6 +18,7 @@
 texture = ExtResource("8_58g8i")
 
 [node name="PlaceholderHUD" type="Node"]
+script = ExtResource("1_lwlpr")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 8
