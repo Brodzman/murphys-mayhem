@@ -22,8 +22,10 @@ var game_data = GameData.new()
 @onready var plant_shape: StaticBody3D = $"../Greybox/PlantShape"
 @onready var puddle: StaticBody3D = $"../Greybox/Puddle"
 @onready var muffin: Node = $"../Greybox/NavigationRegion3D/FINAL 3D ASSETS/MuffinManager"
-@onready var task_delay_timer: Timer = $TaskDelayTimer
+@onready var task_delay_timer: Timer = $TaskDelayTimer 
+@onready var task_list: VBoxContainer = $PlaceholderHUD/TaskList
 
+var task_item_scene: PackedScene = preload("res://new_task.tscn")
 var text_track
 var task_number
 var can_eat_muffin = true
@@ -90,10 +92,10 @@ func task_roll(task):
 					task_delay_timer.start()
 				task = "friend_call"
 				description = " | Friend is calling"
-				task_label.text = text_track + " | Answer the phone"
-				text_track = task_label.text
+				spawn_task_ui("Answer the phone")  # ← This adds it to the container
 				active_tasks["friend_call"] = true
 				emit_signal("task_call", task, description)
+				
 			else:
 				task_get_rng()
 				task_delay_timer.wait_time = 0.1
@@ -237,6 +239,12 @@ func _all_muffins_done(new_text):
 	can_eat_muffin = false
 	active_tasks["muffin_eat"] = false
 	
+func spawn_task_ui(description: String):
+		var task_item = task_item_scene.instantiate()
+		var label = task_item.get_node("TaskLabel")
+		label.text = description
+		task_list.add_child(task_item)
+		
 #######################
 # Functions for saving
 #######################

@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cyriaxqqdk6ye"]
+
+[ext_resource type="Texture2D" uid="uid://ythdb8ubtj1i" path="res://Images/UI Art/wheel_meter_yellow.png" id="1_ncuq8"]
+[ext_resource type="FontFile" uid="uid://dh32vslbjc75e" path="res://Fonts/Simply Rounded.ttf" id="2_s7alr"]
+
+[node name="NewTask" type="HBoxContainer"]
+theme_override_constants/separation = 45
+
+[node name="TaskMeter" type="TextureProgressBar" parent="."]
+layout_mode = 2
+value = 80.0
+fill_mode = 4
+texture_progress = ExtResource("1_ncuq8")
+
+[node name="TaskLabel" type="Label" parent="."]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("2_s7alr")
+theme_override_font_sizes/font_size = 100
+text = "Answer the phone"
