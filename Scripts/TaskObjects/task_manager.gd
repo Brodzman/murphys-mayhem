@@ -24,6 +24,19 @@ var game_data = GameData.new()
 @onready var muffin: Node = $"../Greybox/NavigationRegion3D/FINAL 3D ASSETS/MuffinManager"
 @onready var task_delay_timer: Timer = $TaskDelayTimer
 
+# Timers for each task
+@onready var phone_timer: Timer = $"../Greybox/Phone/PhoneTimer"
+@onready var plant_timer: Timer = $"../Greybox/PlantShape/PlantTimer"
+@onready var puddle_timer: Timer = $"../Greybox/Puddle/PuddleTimer"
+@onready var tv_timer: Timer = $"../Greybox/TV/TVTimer"
+@onready var muffin_timer: Timer = $"../Greybox/NavigationRegion3D/FINAL 3D ASSETS/MuffinManager/MuffinTimer"
+
+var phone_task_time = 20
+var plant_task_time = 40
+var puddle_task_time = 20
+var tv_task_time = 40
+var muffin_task_time = 30
+
 var text_track
 var task_number
 var can_eat_muffin = true
@@ -47,6 +60,12 @@ signal tut_watched
 signal tut_mopped
 
 func _ready() -> void:
+	phone_timer.wait_time = phone_task_time
+	plant_timer.wait_time = plant_task_time
+	puddle_timer.wait_time = puddle_task_time
+	tv_timer.wait_time = tv_task_time
+	muffin_timer.wait_time = muffin_task_time
+	
 	can_eat_muffin = true
 	can_call = true
 	pause_menu.connect("save_all_data", Callable(self, "_on_save_all_data"))
