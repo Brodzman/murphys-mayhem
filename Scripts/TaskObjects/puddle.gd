@@ -9,7 +9,7 @@ signal mop_done
 
 @onready var task_label: Label = $"../../PlaceholderHUD/ColorRect/Task"
 @onready var game_over: Label = $"../../PlaceholderHUD/ColorRect/GameOver"
-@onready var puddle_timer: Timer = $PuddleTimer
+@onready var puddle_timer: Timer= $PuddleTimer
 @onready var node_3d: Node3D = $"../.."
 
 func _ready() -> void:
