@@ -70,6 +70,7 @@ func _ready() -> void:
 	can_eat_muffin = true
 	can_call = true
 	pause_menu.connect("save_all_data", Callable(self, "_on_save_all_data"))
+	
 	phone.connect("spam_call_done", Callable(self, "_on_spam_call_done"))
 	phone.connect("friend_call_done", Callable(self, "_on_friend_call_done"))
 	tv.connect("tv_done", Callable(self, "_on_watch_done"))
@@ -90,7 +91,7 @@ func _ready() -> void:
 	
 	
 func task_get_rng():
-	task_number = randi_range(1, 6) # Change value based on amount of tasks
+	task_number = randi_range(1, 1) # Change value based on amount of tasks
 
 func _on_timer_timeout() -> void:
 	task_get_rng()
