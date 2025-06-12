@@ -62,7 +62,7 @@ signal tut_watched
 signal tut_mopped
 
 func _ready() -> void:
-	add_muffin_task()
+	add_all_tasks()
 	print(avaliable_tasks)
 	phone_timer.wait_time = phone_task_time
 	plant_timer.wait_time = plant_task_time
@@ -224,9 +224,10 @@ func task_roll(task):
 		task_delay_timer.wait_time = 0.1
 		task_delay_timer.start()
 	print(active_tasks)
-###########
+	
+#######################
 # Functions for adding what tasks are avaliable to be triggered
-###########
+#######################
 func add_friend_call_task():
 	avaliable_tasks.append(1)
 	
@@ -244,6 +245,9 @@ func add_tv_task():
 	
 func add_muffin_task():
 	avaliable_tasks.append(6)
+
+func add_all_tasks():
+	avaliable_tasks = [1, 2, 3, 4, 5, 6]
 
 
 func _on_spam_call_done(new_text):
@@ -297,6 +301,7 @@ func load_data():
 	print("loaded")
 
 func load_on_start():
+	avaliable_tasks.append_array(game_data.saved_avaliable_tasks)
 	active_tasks = game_data.current_tasks
 	time_of_day.current_hour = game_data.current_hour
 	time_of_day.minutes = game_data.current_minute
@@ -305,6 +310,7 @@ func save_data():
 	game_data.update_hour(time_of_day.current_hour)
 	game_data.update_minute(time_of_day.minutes)
 	game_data.update_tasks(active_tasks)
+	game_data.update_avaliable_tasks(avaliable_tasks)
 	# TODO Add in muffins complete
 	# TODO Add in tutorial complete
 	# TODO Add in levels complete
