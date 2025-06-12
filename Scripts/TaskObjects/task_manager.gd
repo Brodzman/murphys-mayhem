@@ -38,6 +38,7 @@ var puddle_task_time = 20
 var tv_task_time = 40
 var muffin_task_time = 30
 
+var avaliable_tasks = []
 var text_track
 var task_number
 var can_eat_muffin = true
@@ -61,6 +62,8 @@ signal tut_watched
 signal tut_mopped
 
 func _ready() -> void:
+	add_muffin_task()
+	print(avaliable_tasks)
 	phone_timer.wait_time = phone_task_time
 	plant_timer.wait_time = plant_task_time
 	puddle_timer.wait_time = puddle_task_time
@@ -91,7 +94,8 @@ func _ready() -> void:
 	
 	
 func task_get_rng():
-	task_number = randi_range(1, 1) # Change value based on amount of tasks
+	task_number = avaliable_tasks.pick_random()
+	#task_number = randi_range(1, 6) # Change value based on amount of tasks
 
 func _on_timer_timeout() -> void:
 	task_get_rng()
@@ -220,6 +224,27 @@ func task_roll(task):
 		task_delay_timer.wait_time = 0.1
 		task_delay_timer.start()
 	print(active_tasks)
+###########
+# Functions for adding what tasks are avaliable to be triggered
+###########
+func add_friend_call_task():
+	avaliable_tasks.append(1)
+	
+func add_spam_call_task():
+	avaliable_tasks.append(2)
+	
+func add_water_task():
+	avaliable_tasks.append(3)
+	
+func add_mop_task():
+	avaliable_tasks.append(4)
+	
+func add_tv_task():
+	avaliable_tasks.append(5)
+	
+func add_muffin_task():
+	avaliable_tasks.append(6)
+
 
 func _on_spam_call_done(new_text):
 	text_track = new_text
