@@ -32,11 +32,20 @@ var game_data = GameData.new()
 @onready var tv_timer: Timer = $"../Greybox/TV/TVTimer"
 @onready var muffin_timer: Timer = $"../Greybox/NavigationRegion3D/FINAL 3D ASSETS/MuffinManager/MuffinTimer"
 
+# How long you have to complete each task
 var phone_task_time = 20
 var plant_task_time = 40
 var puddle_task_time = 20
 var tv_task_time = 40
 var muffin_task_time = 30
+
+# How long until the next task is triggered
+var friend_call_delay = 8
+var spam_call_delay = 8
+var water_delay = 15
+var mop_delay = 5
+var tv_delay
+var muffin_delay
 
 var avaliable_tasks = []
 var text_track
@@ -52,6 +61,9 @@ var active_tasks = {
 	"muffin_eat": false,
 }
 
+# TEMP to test difficulty
+var difficulty = 1
+
 signal task_call(task, description)
 signal task_plant(task, description)
 signal task_mop(task, description)
@@ -62,7 +74,7 @@ signal tut_watched
 signal tut_mopped
 
 func _ready() -> void:
-	add_all_tasks()
+	populate_tasks(difficulty)
 	print(avaliable_tasks)
 	phone_timer.wait_time = phone_task_time
 	plant_timer.wait_time = plant_task_time
@@ -73,7 +85,6 @@ func _ready() -> void:
 	can_eat_muffin = true
 	can_call = true
 	pause_menu.connect("save_all_data", Callable(self, "_on_save_all_data"))
-	
 	phone.connect("spam_call_done", Callable(self, "_on_spam_call_done"))
 	phone.connect("friend_call_done", Callable(self, "_on_friend_call_done"))
 	tv.connect("tv_done", Callable(self, "_on_watch_done"))
@@ -111,7 +122,7 @@ func task_roll(task):
 			if phone.friend_call_complete == true and phone.spam_call_complete == true:
 				can_call = false
 				if task_delay_timer.wait_time > 0:
-					task_delay_timer.wait_time = 8
+					task_delay_timer.wait_time = friend_call_delay
 					task_delay_timer.start()
 				task = "friend_call"
 				description = " | Friend is calling"
@@ -165,7 +176,7 @@ func task_roll(task):
 	
 	# Mop the floor (if fish has been out enough)
 	# Pick up mop and clean up water areas
-	elif task == 4 and time_of_day.current_hour > 12: 
+	elif task == 4: 
 		if puddle.mop_complete == true:
 			if task_delay_timer.wait_time > 0:
 				task_delay_timer.wait_time = 5
@@ -228,6 +239,26 @@ func task_roll(task):
 #######################
 # Functions for adding what tasks are avaliable to be triggered
 #######################
+func populate_tasks(difficulty):
+	match difficulty:
+		0:
+			pass # Tutorial 
+		1:
+			add_friend_call_task()
+			add_muffin_task()
+			if time_of_day.current_hour > 11:
+				add_tv_task()
+			if time_of_day.current_hour > 12:
+				add_spam_call_task()
+			if time_of_day.current_hour > 13:
+				add_mop_task()
+			if time_of_day.current_hour > 14:
+				add_water_task()
+		2:
+			pass # Medium
+		3:
+			pass # Hard
+
 func add_friend_call_task():
 	avaliable_tasks.append(1)
 	
