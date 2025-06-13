@@ -8,6 +8,7 @@ class_name GameData
 @export var muffins_eaten : int
 @export var tutorial_complete : bool
 @export var levels_complete : Dictionary
+@export var saved_avaliable_tasks : Array[int]
 
 func update_hour(value):
 	current_hour = value
@@ -29,4 +30,7 @@ func update_tutorial_complete(value):
 	
 func update_levels_complete(value):
 	levels_complete = value
+	
+func update_avaliable_tasks(value):
+	saved_avaliable_tasks.append_array(value)
 	
