@@ -24,7 +24,7 @@ func _on_interacted(body: Variant) -> void:
 	emit_signal("food_in_hand")
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event.is_action_pressed("drop_food"):
+	if event.is_action_pressed("drop"):
 		drop_label.text = ""
 		in_hand = false
 		visible = true
