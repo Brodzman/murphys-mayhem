@@ -218,10 +218,16 @@ func _on_food_in_hand():
 	has_food = true
 	
 func _process(delta: float) -> void:	
-	if Input.is_action_just_pressed("save"):
-		save_data()
-	if Input.is_action_just_pressed("load"):
-		load_data()
+	if Input.is_action_just_pressed("drop"):
+		if is_held:
+			# ADD drop_label.text = ""
+			is_held = false
+			visible = true
+			set_collision_layer_value(2, true)
+			var drop_offset = Vector3(0, 0, 2)
+			global_position = interact_ray.global_position - interact_ray.global_transform.basis.z
+			region.enabled = true
+			fish_move()
 	
 #######################
 # Functions for saving
