@@ -1,5 +1,8 @@
 extends CharacterBody3D
 
+
+
+
 # Save file variables
 var save_file_path = "user://save/"
 var save_file_name = "FishSave.tres"
@@ -58,6 +61,8 @@ func _ready() -> void:
 		load_data()
 	if in_bowl == false:
 		fish_move()
+	var node = get_node("res://Scenes/Murphy/murphy_fish_idle.tscn")
+	#add_child(node)
 
 func interact(body):
 	interacted.emit(body)
