@@ -6,8 +6,6 @@ extends Node
 #Individual task scene
 var NewTask = preload("res://new_task.tscn")
 
-var task_name = {}
-
 func _ready():
 	# Connect task starting signals
 	$"../TaskManager".connect("task_call", Callable(self, "_on_phone_task"))
@@ -25,48 +23,56 @@ func _ready():
 	$"../Greybox/NavigationRegion3D/FINAL 3D ASSETS/MuffinManager".connect("muffin_done", Callable(self, "_on_muffin_done"))
 	$"../Greybox/NavigationRegion3D/FINAL 3D ASSETS/MuffinManager".connect("all_muffins_done", Callable(self, "_all_muffins_done"))
 	
-	spawn_task()
 
 #Spawns a new task
-func spawn_task():
+func spawn_task(description = ""):
 	var new_task = NewTask.instantiate()
 	task_list.add_child(new_task)
+	var task_label = new_task.find_child("TaskLabel")
+	task_label.text = description
 
+func remove_task():
+	queue_free()
+	
+	
 # Functions for when recieving the task
-func _on_friend_call_task():
-	pass
+func _on_phone_task(task, description):
+	spawn_task(description)
 	
-func _on_plant_task():
-	pass
+func _on_plant_task(task, description):
+	spawn_task(description)
 
-func _on_mop_task():
-	pass
+func _on_mop_task(task, description):
+	spawn_task(description)
 
-func _on_tv_task():
-	pass
+func _on_tv_task(task, description):
+	spawn_task(description)
 	
-func _on_muffin_task():
-	pass
+func _on_muffin_task(task, description):
+	spawn_task(description)
+
+
+
 
 
 # Functions for when completing the task
 func _on_spam_call_done():
-	pass
+	remove_task()
 	
 func _on_friend_call_done():
-	pass
+	remove_task()
 	
 func _on_watch_done():
-	pass
+	remove_task()
 	
 func _on_water_done():
-	pass
+	remove_task()
 	
 func _on_mop_done():
-	pass
+	remove_task()
 	
 func _on_muffin_done():
-	pass
+	remove_task()
 	
 func _all_muffins_done():
-	pass
+	remove_task()

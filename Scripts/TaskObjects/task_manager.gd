@@ -73,7 +73,10 @@ signal tut_friend_called
 signal tut_watched
 signal tut_mopped
 
+
+
 func _ready() -> void:
+	
 	populate_tasks(difficulty)
 	print(avaliable_tasks)
 	phone_timer.wait_time = phone_task_time
@@ -336,6 +339,7 @@ func load_on_start():
 	active_tasks = game_data.current_tasks
 	time_of_day.current_hour = game_data.current_hour
 	time_of_day.minutes = game_data.current_minute
+	
 
 func save_data():
 	game_data.update_hour(time_of_day.current_hour)
