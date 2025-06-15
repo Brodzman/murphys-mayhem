@@ -128,7 +128,7 @@ func task_roll(task):
 					task_delay_timer.wait_time = friend_call_delay
 					task_delay_timer.start()
 				task = "friend_call"
-				description = " | Friend is calling"
+				description = " Friend is calling"
 				
 				active_tasks["friend_call"] = true
 				emit_signal("task_call", task, description)
@@ -149,8 +149,8 @@ func task_roll(task):
 					task_delay_timer.wait_time = 8
 					task_delay_timer.start()
 				task = "spam_call"
-				description = " | Spam call"
-				task_label.text = text_track + " | Answer the phone"
+				description = "  Spam call"
+				task_label.text = text_track + " Answer the phone"
 				text_track = task_label.text
 				active_tasks["spam_call"] = true
 				emit_signal("task_call", task, description)
@@ -167,7 +167,7 @@ func task_roll(task):
 				task_delay_timer.wait_time = 15
 				task_delay_timer.start()
 			task = "water_plant"
-			description = " | You need to water your plants"
+			description = " You need to water your plants"
 			task_label.text = text_track + description
 			text_track = task_label.text
 			active_tasks["water_plant"] = true
@@ -187,7 +187,7 @@ func task_roll(task):
 			puddle.visible = true
 			puddle_collision.disabled = false
 			task = "mop_floor"
-			description = " | Clean up Murphy's mess"
+			description = " Clean up Murphy's mess"
 			task_label.text = text_track + description
 			text_track = task_label.text
 			active_tasks["mop_floor"] = true
@@ -205,7 +205,7 @@ func task_roll(task):
 				task_delay_timer.wait_time = 10
 				task_delay_timer.start()
 			task = "watch_tv"
-			description = " | Your favorite show is on"
+			description = " Your favorite show is on"
 			task_label.text = text_track + description
 			text_track = task_label.text
 			active_tasks["watch_tv"] = true
@@ -224,7 +224,7 @@ func task_roll(task):
 					task_delay_timer.wait_time = 11
 					task_delay_timer.start()
 				task = "muffin_eat"
-				description = " | Find a muffin to eat"
+				description = " Find a muffin to eat"
 				task_label.text = text_track + description
 				text_track = task_label.text
 				active_tasks["muffin_eat"] = true

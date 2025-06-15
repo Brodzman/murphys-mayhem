@@ -1,5 +1,9 @@
 extends Node
 
+##This script instances tasks into a container with their own label/timer & deletes them when finished
+
+
+#Referencing tasklist container & newtask scene
 @onready var task_list: VBoxContainer = %TaskList
 var NewTask = preload("res://new_task.tscn")
 
@@ -59,7 +63,7 @@ func _process(delta):
 		if remaining <= 0:
 			tasks_to_remove.append(task)
 
-# Remove finished tasks
+# Remove finished tasks (removes oldest one of same type)
 	for task in tasks_to_remove:
 		task["node"].queue_free()
 		active_tasks.erase(task)
