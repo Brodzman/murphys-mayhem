@@ -72,12 +72,6 @@ func _process(delta):
 	if head:
 		head.rotation.z = 0
 		
-	# TEMP Keybind setup to test save system
-	if Input.is_action_just_pressed("save"):
-		save_data()
-	if Input.is_action_just_pressed("load"):
-		load_data()
-		
 func _physics_process(delta: float) -> void: #DEFAULT MOVEMENT
 	
 	if is_on_floor() and Input.is_action_just_pressed("jump"):

@@ -373,9 +373,3 @@ func save_data():
 
 func _on_save_all_data():
 	save_data()
-	
-func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("save"):
-		save_data()
-	if Input.is_action_just_pressed("load"):
-		load_data()
