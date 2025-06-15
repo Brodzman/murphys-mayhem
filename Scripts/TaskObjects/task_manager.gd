@@ -32,13 +32,6 @@ var game_data = GameData.new()
 @onready var tv_timer: Timer = $"../Greybox/TV/TVTimer"
 @onready var muffin_timer: Timer = $"../Greybox/NavigationRegion3D/FINAL 3D ASSETS/MuffinManager/MuffinTimer"
 
-# How long you have to complete each task
-var phone_task_time = 20
-var plant_task_time = 40
-var puddle_task_time = 20
-var tv_task_time = 40
-var muffin_task_time = 30
-
 # How long until the next task is triggered
 var friend_call_delay = 8
 var spam_call_delay = 8
@@ -76,14 +69,10 @@ signal tut_mopped
 
 
 func _ready() -> void:
-	
 	populate_tasks(difficulty)
 	print(avaliable_tasks)
-	phone_timer.wait_time = phone_task_time
-	plant_timer.wait_time = plant_task_time
-	puddle_timer.wait_time = puddle_task_time
-	tv_timer.wait_time = tv_task_time
-	muffin_timer.wait_time = muffin_task_time
+	set_tasks_times(difficulty)
+	
 	
 	can_eat_muffin = true
 	can_call = true
@@ -249,10 +238,10 @@ func populate_tasks(difficulty):
 		1:
 			add_friend_call_task()
 			add_muffin_task()
-			if time_of_day.current_hour > 11:
-				add_tv_task()
-			if time_of_day.current_hour > 12:
+			if time_of_day.current_hour > 10:
 				add_spam_call_task()
+			if time_of_day.current_hour > 12:
+				add_tv_task()
 			if time_of_day.current_hour > 13:
 				add_mop_task()
 			if time_of_day.current_hour > 14:
@@ -260,7 +249,37 @@ func populate_tasks(difficulty):
 		2:
 			pass # Medium
 		3:
-			pass # Hard
+			add_all_tasks()
+
+func set_tasks_times(difficulty):
+	# How long you have to complete each task
+	var phone_task_time = 20
+	var plant_task_time = 40
+	var puddle_task_time = 20
+	var tv_task_time = 40
+	var muffin_task_time = 30
+	match difficulty:
+		0: # Tutorial
+			pass
+		1: # Medium 
+			phone_task_time = 20
+			plant_task_time = 40
+			puddle_task_time = 20
+			tv_task_time = 40
+			muffin_task_time = 30
+		2: # Medium
+			pass
+		3: # Hard
+			phone_task_time = 10
+			plant_task_time = 30
+			puddle_task_time = 8
+			tv_task_time = 30
+			muffin_task_time = 12
+	phone_timer.wait_time = phone_task_time
+	plant_timer.wait_time = plant_task_time
+	puddle_timer.wait_time = puddle_task_time
+	tv_timer.wait_time = tv_task_time
+	muffin_timer.wait_time = muffin_task_time
 
 func add_friend_call_task():
 	avaliable_tasks.append(1)
