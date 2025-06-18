@@ -16,7 +16,7 @@ signal dishes_done
 func _ready() -> void:
 	dishes_progress = 0
 	dishes_complete = true
-	$"../../TaskManager".connect("task_dishes", Callable(self, "_on_task"))
+	$"../../../../TaskManager".connect("task_dishes", Callable(self, "_on_task"))
 	visible = false
 
 func _on_task(task, description):

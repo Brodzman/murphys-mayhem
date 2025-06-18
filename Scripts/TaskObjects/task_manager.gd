@@ -32,14 +32,16 @@ var game_data = GameData.new()
 @onready var puddle_timer: Timer = $"../Greybox/Puddle/PuddleTimer"
 @onready var tv_timer: Timer = $"../Greybox/TV/TVTimer"
 @onready var muffin_timer: Timer = $"../Greybox/NavigationRegion3D/FINAL 3D ASSETS/MuffinManager/MuffinTimer"
+@onready var dishes_timer: Timer = $"../Greybox/NavigationRegion3D/FINAL 3D ASSETS/KITCHENSINK/DishesTimer"
 
 # How long until the next task is triggered
 var friend_call_delay = 8
 var spam_call_delay = 8
-var water_delay = 15
+var water_delay = 20
 var mop_delay = 5
-var tv_delay
-var muffin_delay
+var tv_delay = 25
+var muffin_delay = 10
+var dishes_delay = 10
 
 var avaliable_tasks = []
 var text_track
@@ -138,7 +140,7 @@ func task_roll(task):
 			if phone.friend_call_complete == true and phone.spam_call_complete == true:
 				can_call = false
 				if task_delay_timer.wait_time > 0:
-					task_delay_timer.wait_time = 8
+					task_delay_timer.wait_time = spam_call_delay
 					task_delay_timer.start()
 				task = "spam_call"
 				description = "  Spam call"
@@ -156,7 +158,7 @@ func task_roll(task):
 	elif task == 3: 
 		if plant_shape.can_start_watering == true:
 			if task_delay_timer.wait_time > 0:
-				task_delay_timer.wait_time = 15
+				task_delay_timer.wait_time = water_delay
 				task_delay_timer.start()
 			task = "water_plant"
 			description = " You need to water your plants"
@@ -174,7 +176,7 @@ func task_roll(task):
 	elif task == 4: 
 		if puddle.mop_complete == true:
 			if task_delay_timer.wait_time > 0:
-				task_delay_timer.wait_time = 5
+				task_delay_timer.wait_time = mop_delay
 				task_delay_timer.start()
 			puddle.visible = true
 			puddle_collision.disabled = false
@@ -194,7 +196,7 @@ func task_roll(task):
 	elif task == 5: 
 		if tv.watch_tv_done == true:
 			if task_delay_timer.wait_time > 0:
-				task_delay_timer.wait_time = 10
+				task_delay_timer.wait_time = tv_delay
 				task_delay_timer.start()
 			task = "watch_tv"
 			description = " Your favorite show is on"
@@ -212,7 +214,7 @@ func task_roll(task):
 		if can_eat_muffin == true:
 			if muffin.muffin_complete == true:
 				if task_delay_timer.wait_time > 0:
-					task_delay_timer.wait_time = 11
+					task_delay_timer.wait_time = muffin_delay
 					task_delay_timer.start()
 				task = "muffin_eat"
 				description = " Find a muffin to eat"
@@ -229,7 +231,7 @@ func task_roll(task):
 	elif task_number == 7:
 		if sink.dishes_done == true:
 			if task_delay_timer.wait_time > 0:
-				task_delay_timer.wait_time = 10
+				task_delay_timer.wait_time = dishes_delay
 				task_delay_timer.start()
 			task = "dishes"
 			description = " The dishes are pilling up"
@@ -273,11 +275,12 @@ func populate_tasks(difficulty):
 
 func set_tasks_times(difficulty):
 	# How long you have to complete each task
-	var phone_task_time = 20
-	var plant_task_time = 40
-	var puddle_task_time = 20
-	var tv_task_time = 40
-	var muffin_task_time = 30
+	var phone_task_time
+	var plant_task_time
+	var puddle_task_time
+	var tv_task_time
+	var muffin_task_time
+	var dishes_task_time
 	match difficulty:
 		0: # Tutorial
 			pass
@@ -287,6 +290,7 @@ func set_tasks_times(difficulty):
 			puddle_task_time = 20
 			tv_task_time = 40
 			muffin_task_time = 30
+			dishes_task_time = 20
 		2: # Medium
 			pass
 		3: # Hard
@@ -295,11 +299,13 @@ func set_tasks_times(difficulty):
 			puddle_task_time = 8
 			tv_task_time = 30
 			muffin_task_time = 12
+			dishes_task_time = 10
 	phone_timer.wait_time = phone_task_time
 	plant_timer.wait_time = plant_task_time
 	puddle_timer.wait_time = puddle_task_time
 	tv_timer.wait_time = tv_task_time
 	muffin_timer.wait_time = muffin_task_time
+	dishes_timer.wait_time = dishes_task_time
 
 func add_friend_call_task():
 	avaliable_tasks.append(1)
@@ -318,9 +324,12 @@ func add_tv_task():
 	
 func add_muffin_task():
 	avaliable_tasks.append(6)
+	
+func add_dishes_task():
+	avaliable_tasks.append(7)
 
 func add_all_tasks():
-	avaliable_tasks = [1, 2, 3, 4, 5, 6]
+	avaliable_tasks = [1, 2, 3, 4, 5, 6, 7]
 
 
 func _on_spam_call_done(new_text):
@@ -359,7 +368,10 @@ func _all_muffins_done(new_text):
 	text_track = new_text
 	can_eat_muffin = false
 	active_tasks["muffin_eat"] = false
-	
+
+func _on_dishes_done(new_text):
+	text_track = new_text
+	active_tasks["dishes"] = false
 
 		
 #######################
