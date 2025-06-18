@@ -22,6 +22,7 @@ var game_data = GameData.new()
 @onready var plant_shape: StaticBody3D = $"../Greybox/PlantShape"
 @onready var puddle: StaticBody3D = $"../Greybox/Puddle"
 @onready var muffin: Node = $"../Greybox/NavigationRegion3D/FINAL 3D ASSETS/MuffinManager"
+@onready var sink: StaticBody3D = $"../Greybox/NavigationRegion3D/FINAL 3D ASSETS/KITCHENSINK"
 @onready var task_delay_timer: Timer = $TaskDelayTimer 
 @onready var task_list: VBoxContainer = $PlaceholderHUD/TaskList
 
@@ -52,6 +53,7 @@ var active_tasks = {
 	"mop_floor": false,
 	"watch_tv": false,
 	"muffin_eat": false,
+	"dishes": false
 }
 
 # TEMP to test difficulty
@@ -62,6 +64,7 @@ signal task_plant(task, description)
 signal task_mop(task, description)
 signal task_tv(task, description)
 signal task_muffin(task, description)
+signal task_dishes(task, description)
 signal tut_friend_called
 signal tut_watched
 signal tut_mopped
@@ -204,8 +207,7 @@ func task_roll(task):
 			task_delay_timer.wait_time = 0.1
 			task_delay_timer.start()
 	
-	# Make your own food
-	# Get all ingredients
+	# Eat a muffin
 	elif task == 6:
 		if can_eat_muffin == true:
 			if muffin.muffin_complete == true:
@@ -222,6 +224,24 @@ func task_roll(task):
 				task_get_rng()
 				task_delay_timer.wait_time = 0.1
 				task_delay_timer.start()
+		
+	# Do dishes
+	elif task_number == 7:
+		if sink.dishes_done == true:
+			if task_delay_timer.wait_time > 0:
+				task_delay_timer.wait_time = 10
+				task_delay_timer.start()
+			task = "dishes"
+			description = " The dishes are pilling up"
+			task_label.text = text_track + description
+			text_track = task_label.text
+			active_tasks["dishes"] = true
+			emit_signal("task_dishes", task, description)
+		else:
+			task_get_rng()
+			task_delay_timer.wait_time = 0.1
+			task_delay_timer.start()
+	
 	else:
 		task_get_rng()
 		task_delay_timer.wait_time = 0.1

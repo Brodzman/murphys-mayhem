@@ -1,4 +1,4 @@
-[gd_scene load_steps=191 format=4 uid="uid://dxvn05oothtqk"]
+[gd_scene load_steps=192 format=4 uid="uid://dxvn05oothtqk"]
 
 [ext_resource type="Script" uid="uid://c1kl4afcthavy" path="res://Scripts/Player/Player.gd" id="1_swxtx"]
 [ext_resource type="Script" uid="uid://co84qbrc20dr3" path="res://Scripts/main.gd" id="1_wxdcx"]
@@ -30,6 +30,7 @@
 [ext_resource type="Script" uid="uid://qwvvh32yn1ft" path="res://Scripts/TaskObjects/puddle.gd" id="18_b6bht"]
 [ext_resource type="PackedScene" uid="uid://q76t1swxl4rf" path="res://Scenes/3D Models/Furniture/squaresidetable.tscn" id="21_ciywd"]
 [ext_resource type="PackedScene" uid="uid://dxin16b1056dk" path="res://Scenes/3D Models/Appliances/powercords.tscn" id="22_0twiy"]
+[ext_resource type="Script" uid="uid://dnm68h8owui7k" path="res://Scenes/kitchensink.gd" id="23_3ahwd"]
 [ext_resource type="Script" uid="uid://c8ytsqtq4am0l" path="res://Scripts/TaskObjects/plant_shape.gd" id="23_k0hlu"]
 [ext_resource type="Material" uid="uid://b21lmff76q1p4" path="res://Materials/carpet1.tres" id="24_a7eq8"]
 [ext_resource type="PackedScene" uid="uid://csc8rasqvg85n" path="res://Scenes/3D Models/Furniture/sofa.tscn" id="25_mudd8"]
@@ -814,7 +815,9 @@ transform = Transform3D(-0.05, 0, 8.97363e-09, 0, 0.0578641, 0, -7.54979e-09, 0,
 
 [node name="KITCHENSINK" type="StaticBody3D" parent="Greybox/NavigationRegion3D/FINAL 3D ASSETS"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.60433, 2.26946, 7.58978)
+collision_layer = 3
 collision_mask = 7
+script = ExtResource("23_3ahwd")
 
 [node name="KITCHENSINK" parent="Greybox/NavigationRegion3D/FINAL 3D ASSETS/KITCHENSINK" instance=ExtResource("34_1ywq6")]
 transform = Transform3D(-70.708, 0, -1.05697e-05, 0, 70, 0, 1.06766e-05, 0, -70, 0.57299, -2.34913, -0.907837)
@@ -822,6 +825,8 @@ transform = Transform3D(-70.708, 0, -1.05697e-05, 0, 70, 0, 1.06766e-05, 0, -70,
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Greybox/NavigationRegion3D/FINAL 3D ASSETS/KITCHENSINK"]
 transform = Transform3D(0.996231, 0, 0, 0, 0.996231, 0, 0, 0, 0.996231, -0.368896, -1.24037, -0.387762)
 shape = SubResource("BoxShape3D_jf0uf")
+
+[node name="DishesTimer" type="Timer" parent="Greybox/NavigationRegion3D/FINAL 3D ASSETS/KITCHENSINK"]
 
 [node name="LAMP" type="RigidBody3D" parent="Greybox/NavigationRegion3D/FINAL 3D ASSETS"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.826554, 0.697162, -3.86429)

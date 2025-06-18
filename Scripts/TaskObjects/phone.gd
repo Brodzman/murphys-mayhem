@@ -49,6 +49,7 @@ func _on_interacted(body: Variant) -> void:
 		task_label.text = new_text
 		emit_signal("friend_call_done", task_label.text)
 		caller_id.text = "it was your friend checking on his fish"
+		phone_call = ""
 		await get_tree().create_timer(2).timeout
 		caller_id.text = ""
 		
@@ -60,5 +61,6 @@ func _on_interacted(body: Variant) -> void:
 		task_label.text = new_text
 		emit_signal("spam_call_done", task_label.text)
 		caller_id.text = "it was a spam call"
+		phone_call = ""
 		await get_tree().create_timer(2).timeout
 		caller_id.text = ""
