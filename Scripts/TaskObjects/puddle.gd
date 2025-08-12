@@ -7,12 +7,14 @@ var mop_complete = true
 
 signal mop_done
 
+@onready var puddle_game: Control = $PuddleGame
 @onready var task_label: Label = $"../../PlaceholderHUD/ColorRect/Task"
 @onready var game_over: Label = $"../../PlaceholderHUD/ColorRect/GameOver"
 @onready var puddle_timer: Timer= $PuddleTimer
 @onready var node_3d: Node3D = $"../.."
 
 func _ready() -> void:
+	puddle_game.hide()
 	mop_progress = 0
 	mop_complete = true
 	$"../../TaskManager".connect("task_mop", Callable(self, "_on_task"))
@@ -37,6 +39,7 @@ func _on_task(task, description):
 func _on_interacted(body: Variant) -> void:
 	var new_text
 	if mop_floor == "mop_floor":
+		puddle_game.show()
 		if mop_progress > 5:
 			puddle_timer.stop()
 			mop_complete = true

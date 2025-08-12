@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://bkyjytr1sdor8"]
+
+[ext_resource type="Script" uid="uid://dgdluyu33veyf" path="res://Scenes/Tasks/puddle_game.gd" id="1_1jro8"]
+
+[node name="PuddleGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_1jro8")
+
+[node name="cloth" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -407.0
+offset_top = -194.0
+offset_right = 407.0
+offset_bottom = 194.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[connection signal="button_down" from="cloth" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="cloth" to="." method="_on_cloth_button_up"]
