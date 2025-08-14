@@ -1,12 +1,17 @@
-[gd_scene format=3 uid="uid://vnqhsu311vfb"]
+[gd_scene load_steps=2 format=3 uid="uid://vnqhsu311vfb"]
+
+[ext_resource type="Script" uid="uid://bof4f4bg86o64" path="res://Scenes/Tasks/puddle.gd" id="1_2gj6l"]
 
 [node name="Puddle" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 222.0
 offset_bottom = 216.0
+script = ExtResource("1_2gj6l")
 
 [node name="puddle" type="ColorRect" parent="."]
 layout_mode = 0
 offset_right = 222.0
 offset_bottom = 216.0
+
+[connection signal="mouse_entered" from="puddle" to="." method="_on_puddle_mouse_entered"]

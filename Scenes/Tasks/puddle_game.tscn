@@ -42,4 +42,3 @@ offset_bottom = 953.0
 
 [connection signal="button_down" from="mop" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="mop" to="." method="_on_cloth_button_up"]
-[connection signal="mouse_entered" from="Puddle" to="." method="_on_puddle_mouse_entered"]
