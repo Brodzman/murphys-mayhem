@@ -21,15 +21,10 @@ func _ready() -> void:
 	for amount in puddle_amount:
 		var new_puddle = puddle.instantiate()
 		add_child(new_puddle)
-		new_puddle.connect("mopped", Callable(self, "_on_mopped"))
 		spawn_points.shuffle()
 		new_puddle.position = spawn_points[0]
 		spawn_points.remove_at(0)
 
-func _on_mopped():
-	puddle_amount -= 1
-	if puddle_amount == 0:
-		print("win")
 
 func _on_button_button_down() -> void:
 	mouse_held = true
