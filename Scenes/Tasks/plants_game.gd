@@ -4,7 +4,6 @@ extends Control
 
 var mouse_held = false
 var location1_entered = false
-var water_needed = 3
 
 		
 func _process(delta: float) -> void:
@@ -26,9 +25,6 @@ func _on_location_1_mouse_entered() -> void:
 func _on_location_2_mouse_entered() -> void:
 	if mouse_held == true and location1_entered == true:
 		print("water")
-		water_needed -= 1
-		if water_needed == 0:
-			print("win")
 		location1_entered = false
 	else:
 		location1_entered = false

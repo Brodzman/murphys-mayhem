@@ -5,7 +5,6 @@ extends Control
 var puddle = load("res://Scenes/Tasks/puddle.tscn")
 var puddle_amount = 3
 
-signal mop_complete
 signal mop_held(value)
 
 var mouse_held = false
@@ -30,9 +29,8 @@ func _ready() -> void:
 func _on_mopped():
 	puddle_amount -= 1
 	if puddle_amount == 0:
-		emit_signal("mop_complete")
-		
-		
+		print("win")
+
 func _on_button_button_down() -> void:
 	mouse_held = true
 	emit_signal("mop_held", mouse_held)

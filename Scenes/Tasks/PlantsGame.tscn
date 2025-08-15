@@ -27,15 +27,15 @@ grow_vertical = 2
 
 [node name="Location1" type="Control" parent="."]
 anchors_preset = 0
-offset_left = -11.0
-offset_top = 606.0
-offset_right = 2612.0
-offset_bottom = 693.0
+offset_left = -13.0
+offset_top = 765.0
+offset_right = 2610.0
+offset_bottom = 845.0
 
 [node name="Location2" type="Control" parent="."]
 anchors_preset = 0
 offset_left = -16.0
-offset_top = 865.0
+offset_top = 875.0
 offset_right = 2592.0
 offset_bottom = 955.0
 
