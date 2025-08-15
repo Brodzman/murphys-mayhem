@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bkyjytr1sdor8"]
+[gd_scene load_steps=3 format=3 uid="uid://bkyjytr1sdor8"]
 
 [ext_resource type="Script" uid="uid://dgdluyu33veyf" path="res://Scenes/Tasks/puddle_game.gd" id="1_1jro8"]
+[ext_resource type="PackedScene" uid="uid://vnqhsu311vfb" path="res://Scenes/Tasks/puddle.tscn" id="2_0wcji"]
 
 [node name="PuddleGame" type="Control"]
 layout_mode = 3
@@ -25,47 +26,19 @@ offset_bottom = 123.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SpawnPoint1" type="Control" parent="."]
+[node name="Control" type="Control" parent="."]
 anchors_preset = 0
-offset_left = 453.0
-offset_top = 110.0
-offset_right = 601.0
-offset_bottom = 264.0
+offset_left = 2084.0
+offset_top = 436.0
+offset_right = 2254.0
+offset_bottom = 612.0
 
-[node name="SpawnPoint2" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 1536.0
-offset_top = 68.0
-offset_right = 1684.0
-offset_bottom = 222.0
-
-[node name="SpawnPoint3" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 1945.0
-offset_top = 485.0
-offset_right = 2093.0
-offset_bottom = 639.0
-
-[node name="SpawnPoint4" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 1849.0
-offset_top = 1049.0
-offset_right = 1997.0
-offset_bottom = 1203.0
-
-[node name="SpawnPoint5" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 828.0
-offset_top = 848.0
-offset_right = 976.0
-offset_bottom = 1002.0
-
-[node name="SpawnPoint6" type="Control" parent="."]
-anchors_preset = 0
-offset_left = 270.0
-offset_top = 1069.0
-offset_right = 418.0
-offset_bottom = 1223.0
+[node name="Puddle" parent="." instance=ExtResource("2_0wcji")]
+layout_mode = 1
+offset_left = 561.0
+offset_top = 737.0
+offset_right = 783.0
+offset_bottom = 953.0
 
 [connection signal="button_down" from="mop" to="." method="_on_button_button_down"]
 [connection signal="button_up" from="mop" to="." method="_on_cloth_button_up"]
