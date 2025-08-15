@@ -21,6 +21,6 @@ func _on_cloth_button_up() -> void:
 		
 func _process(delta: float) -> void:
 	if mouse_held == true:
-		mop.set_position(get_global_mouse_position())
+		$mop.set_position(get_global_mouse_position())
 		
 		
