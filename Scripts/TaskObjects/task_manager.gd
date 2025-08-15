@@ -74,7 +74,9 @@ signal tut_mopped
 
 
 func _ready() -> void:
-	populate_tasks(difficulty)
+	add_mop_task()
+	
+	# TEMP populate_tasks(difficulty)
 	print(avaliable_tasks)
 	set_tasks_times(difficulty)
 	
