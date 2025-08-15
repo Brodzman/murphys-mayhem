@@ -1,7 +1,6 @@
 extends Control
 
 @onready var mop: Button = $mop
-@onready var container: VBoxContainer = $VBoxContainer
 
 var puddle = load("res://Scenes/Tasks/puddle.tscn")
 var puddle_amount = 3
@@ -32,7 +31,6 @@ func _on_mopped():
 	puddle_amount -= 1
 	if puddle_amount == 0:
 		emit_signal("mop_complete")
-		queue_free()
 		
 		
 func _on_button_button_down() -> void:
@@ -46,6 +44,6 @@ func _on_cloth_button_up() -> void:
 		
 func _process(delta: float) -> void:
 	if mouse_held == true:
-		container.set_position(get_global_mouse_position())
+		mop.set_position(get_global_mouse_position())
 		
 		
