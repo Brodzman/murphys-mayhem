@@ -9,7 +9,7 @@ func _ready() -> void:
 
 func _on_puddle_mouse_entered() -> void:
 	if mouse_held == true:
-		visible = false
+		queue_free()
 		emit_signal("mopped")
 
 func _on_mop_held_done(value):

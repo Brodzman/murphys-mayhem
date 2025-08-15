@@ -39,7 +39,7 @@ func _on_task(task, description):
 func _on_interacted(body: Variant) -> void:
     if mop_floor == "mop_floor":
         var game = puddle_game.instantiate()
-        add_child(game)
+        node_3d.add_child(game)
         game.connect("mop_complete", Callable(self, "_on_mop_complete"))
         Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
             
